@@ -5,7 +5,7 @@ def analyze_text(text):
     for alpha in text1:
         if alpha.isalpha() or alpha == " ":
             text2 += alpha
-    dauysty = "aeiouy"
+    dauysty = "aeiouy"git
     zhana_text = ""
     for alpha in text2:
         if alpha in dauysty:
