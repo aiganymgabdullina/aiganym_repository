@@ -79,3 +79,22 @@ def top_k_words(text, k):
     return top_words
 text = "Hello world! Hello Python. Python, python, code."
 print("3 esep", top_k_words(text, 2))
+
+#4 esep
+process = lambda s: " ".join(
+    lower_w:= list(
+        map(
+            lambda w: w.lower(),
+            filtered_w := list(
+                filter(
+                    lambda w: sum(1 for ch in w if ch.isupper()) == 1
+                              and not w[0].isupper()
+                              and not w[-1].isupper(),
+                    s.split()
+                )
+            )
+        )
+    )
+)
+text = input("4 esep: мәтін: ")
+print(process(text))
