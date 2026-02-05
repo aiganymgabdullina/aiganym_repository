@@ -46,3 +46,36 @@ process = lambda s: " ".join(words := list(filter(
 # Проверка
 text = input("2 esep: мәтін: ")
 print(process(text))
+
+#3 esep
+def top_k_words(text, k):
+    import string
+    text = text.lower()
+    clean_text = ""
+    for ch in text:
+        if ch not in string.punctuation:
+            clean_text += ch
+    words = clean_text.split()
+    f = {}
+    for word in words:
+        if word in f:
+            f[word] += 1
+        else:
+            f[word] = 1
+    f_list = []
+    for word in f:
+        f_list.append((word, f[word]))
+    for i in range(len(f_list)):
+        for j in range(i + 1, len(f_list)):
+            if f_list[j][1] > f_list[i][1]:
+                f_list[i], f_list[j] = f_list[j], f_list[i]
+            elif f_list[j][1] == f_list[i][1]:
+                if f_list[j][0] < f_list[i][0]:
+                    f_list[i], f_list[j] = f_list[j], f_list[i]
+    top_words = []
+    for i in range(min(k, len(f_list))):
+        top_words.append(f_list[i][0])
+
+    return top_words
+text = "Hello world! Hello Python. Python, python, code."
+print("3 esep", top_k_words(text, 2))
