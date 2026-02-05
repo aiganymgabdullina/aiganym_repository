@@ -43,7 +43,6 @@ process = lambda s: " ".join(words := list(filter(
     ))
 )))
 
-# Проверка
 text = input("2 esep: мәтін: ")
 print(process(text))
 
@@ -98,3 +97,5 @@ process = lambda s: " ".join(
 )
 text = input("4 esep: мәтін: ")
 print(process(text))
+
+#5 esep
