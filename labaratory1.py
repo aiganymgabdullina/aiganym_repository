@@ -99,3 +99,4 @@ text = input("4 esep: мәтін: ")
 print(process(text))
 
 #5 esep
+
