@@ -99,4 +99,26 @@ text = input("4 esep: мәтін: ")
 print(process(text))
 
 #5 esep
+def compress_text(text):
+    if not text:
+        return ""
+
+    result = ""
+    count = 1
+    for i in range(1, len(text)):
+        if text[i].lower() == text[i - 1].lower():
+            count += 1
+        else:
+            if count > 1:
+                result += text[i - 1] + str(count)
+            else:
+                result += text[i - 1]
+            count = 1
+    if count > 1:
+        result += text[-1] + str(count)
+    else:
+        result += text[-1]
+    return result
+print("5 esep: ", end="")
+print(compress_text("AaaBBBcc"))
 
