@@ -151,6 +151,18 @@ def palindrome_words(text):
 text = "Madam, level, noon, gagag! radar level kayak?"
 print("7 esep: ", palindrome_words(text))
 
+#8 esep
+text = "Apple banana 123start orange Car7 dog"
+
+result = (lambda s: " ".join(
+    map(lambda word: word if any(ch.isdigit() for ch in word)
+        else "VOWEL" if word[0].lower() in "aeiou"
+        else "CONSONANT",
+        s.split())
+))(text)
+print("8 esep: ",result)
+
+
 
 
 
