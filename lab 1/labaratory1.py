@@ -176,6 +176,17 @@ def alternate_case_blocks(text, n):
     return result.replace(" ", "")
 print("9 esep: ", alternate_case_blocks("HelloWorldPython", 5))
 
+#10 esep
+count_words = lambda s: sum(
+    1 for word in s.split()
+    if any(ch.isdigit() for ch in word)
+    and not word[0].isdigit()
+    and len(word) >= 5
+)
+text = "hello abc12 1test test1234  good1 day"
+print("10 esep: ",count_words(text))
+
+
 
 
 
