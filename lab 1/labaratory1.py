@@ -122,3 +122,16 @@ def compress_text(text):
 print("5 esep: ", end="")
 print(compress_text("AaaBBBcc"))
 
+#6 esep
+filter_words = lambda s: list(
+    filter(
+        lambda w: len(w) >= 4
+        and w.isalpha()
+        and len(set(w.lower())) == len(w),
+        s.split()
+    )
+)
+text = "apple moon pencil  school sun sky"
+print("6 esep: ", filter_words(text))
+
+
