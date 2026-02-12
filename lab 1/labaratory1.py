@@ -162,6 +162,19 @@ result = (lambda s: " ".join(
 ))(text)
 print("8 esep: ",result)
 
+#9 esep
+def alternate_case_blocks(text, n):
+    result = ""
+    block_number = 0
+    for i in range(0, len(text), n):
+        block = text[i:i+n]
+        if block_number % 2 == 0:
+            result += block.upper()
+        else:
+            result += block.lower()
+        block_number += 1
+    return result.replace(" ", "")
+print("9 esep: ", alternate_case_blocks("HelloWorldPython", 5))
 
 
 
