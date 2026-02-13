@@ -296,7 +296,11 @@ def flatten_and_filter(lst):
     return result
 print("18 esep: ", flatten_and_filter([1, [12, -5, [33, 8]],[44,[21,[7,105]]]]))
 
-
+#19 esep
+func = lambda a, b: list(
+    filter(lambda x: x % 2 == 0,
+           [x for x, y in zip(a, b) if x == y]))
+print("19 esep: ", func([2, 3, 4, 6], [2, 5, 4, 7]))
 
 
 
