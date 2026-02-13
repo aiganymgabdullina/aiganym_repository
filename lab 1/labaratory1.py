@@ -89,12 +89,7 @@ process = lambda s: " ".join(
                     lambda w: sum(1 for ch in w if ch.isupper()) == 1
                               and not w[0].isupper()
                               and not w[-1].isupper(),
-                    s.split()
-                )
-            )
-        )
-    )
-)
+                    s.split())))))
 text = input("4 esep: мәтін: ")
 print(process(text))
 
@@ -181,8 +176,7 @@ count_words = lambda s: sum(
     1 for word in s.split()
     if any(ch.isdigit() for ch in word)
     and not word[0].isdigit()
-    and len(word) >= 5
-)
+    and len(word) >= 5)
 text = "hello abc12 1test test1234  good1 day"
 print("10 esep: ",count_words(text))
 
@@ -198,6 +192,13 @@ def common_unique_chars(s1, s2):
     return result
 print("11 esep: ", common_unique_chars("hello world 123", "yellow bird"))
 
+#12 esep
+filter_words = lambda s: list(
+    filter(lambda w: len(w) > 3
+                     and w[0].lower() == w[-1].lower()
+                     and w.lower() != w.lower()[::-1],
+           s.split()))
+print("12 esep: ", filter_words("apple moon pencil  school sun sky test alpha"))
 
 
 
