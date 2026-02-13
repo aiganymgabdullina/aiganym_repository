@@ -218,7 +218,54 @@ def replace_every_nth(text, n, char):
     return result.rstrip()
 print("13 esep: ", replace_every_nth("hello to you 123 world", 2, "*"))
 
+#14 esep
+func = lambda s: ",".join(
+    filter(
+        lambda w: len(set([c.lower() for c in w if c.isalpha()])) > 3
+        and all(w.lower().count(v) <= 1 for v in "aeiou"),
+        s.split()))
+print("14 esep: ", func("planet moon apple sky sleep book train"))
 
+#15 esep
+def word_pattern_sort(text):
+    vowels = "aeiouаеёиоуыэюя"
+    words = text.split()
+    groups = {}
+    for word in words:
+        length = len(word)
+        if length not in groups:
+            groups[length] = []
+        groups[length].append(word)
+    result = []
+    for length in sorted(groups.keys()):
+        group = groups[length]
+        for i in range(len(group)):
+            for j in range(len(group) - 1):
+                v1 = sum(1 for c in group[j].lower() if c in vowels)
+                v2 = sum(1 for c in group[j + 1].lower() if c in vowels)
+                if v1 < v2 or (v1 == v2 and group[j] > group[j + 1]):
+                    group[j], group[j + 1] = group[j + 1], group[j]
+        result.extend(group)
+    return result
+print("15 esep: ", word_pattern_sort("apple dog cat area sky orange book"))
+
+#16 esep
+def transform_list(nums):
+    result = []
+    for num in nums:
+        if num < 0:
+            continue
+        if num % 2 == 0:
+            result.append(num ** 2)
+        elif num > 10:
+            digit_sum = 0
+            for d in str(num):
+                digit_sum += int(d)
+            result.append(digit_sum)
+        else:
+            result.append(num)
+    return result
+print("16 esep: ", transform_list([4, -3, 15, 7, 12, 9, 23]))
 
 
 
