@@ -200,6 +200,25 @@ filter_words = lambda s: list(
            s.split()))
 print("12 esep: ", filter_words("apple moon pencil  school sun sky test alpha"))
 
+#13 esep
+def replace_every_nth(text, n, char):
+    result = ""
+    words = text.split(" ")
+    index = 0
+    for word in words:
+        new_word = ""
+        for ch in word:
+            if (index + 1) % n == 0 and not ch.isdigit() and len(word) >= 3:
+                new_word += char
+            else:
+                new_word += ch
+            index += 1
+        result += new_word + " "
+        index += 1
+    return result.rstrip()
+print("13 esep: ", replace_every_nth("hello to you 123 world", 2, "*"))
+
+
 
 
 
