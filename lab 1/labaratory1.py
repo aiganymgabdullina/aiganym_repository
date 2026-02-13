@@ -302,5 +302,15 @@ func = lambda a, b: list(
            [x for x, y in zip(a, b) if x == y]))
 print("19 esep: ", func([2, 3, 4, 6], [2, 5, 4, 7]))
 
-
+#20 esep
+def max_subarray_sum(nums, k):
+    max_sum = None
+    for i in range(len(nums)-k+1):
+        window = nums[i:i+k]
+        if all(num> 0 for num in window):
+            s = sum(window)
+            if max_sum is None or s > max_sum:
+                max_sum = s
+    return max_sum
+print("20 esep: ", max_subarray_sum([1,2,3,-1,4,5],2))
 
