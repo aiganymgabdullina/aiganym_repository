@@ -267,6 +267,35 @@ def transform_list(nums):
     return result
 print("16 esep: ", transform_list([4, -3, 15, 7, 12, 9, 23]))
 
+#17 esep
+func = lambda nums: list(
+    map(lambda x: x**2,
+        filter(lambda x: (x % 3 == 0 or x % 5 == 0)
+                         and x % 15 != 0
+                         and len(str(abs(x))) % 2 == 1,
+               nums)))
+print("17 esep: ", func([3,5,15,30,105,7,111]))
+
+#18 esep
+def flatten_and_filter(lst):
+    flat = []
+    stack = [lst]
+    while stack:
+        current = stack.pop()
+        if isinstance(current, list):
+            for item in current:
+                stack.append(item)
+        else:
+            if isinstance(current, int):
+                flat.append(current)
+    result = []
+    for num in flat:
+        if num > 0 and num % 4 != 0 and len(str(abs(num))) > 1:
+            result.append(num)
+    result.sort()
+    return result
+print("18 esep: ", flatten_and_filter([1, [12, -5, [33, 8]],[44,[21,[7,105]]]]))
+
 
 
 
