@@ -186,6 +186,20 @@ count_words = lambda s: sum(
 text = "hello abc12 1test test1234  good1 day"
 print("10 esep: ",count_words(text))
 
+#11 esep
+def common_unique_chars(s1, s2):
+    result = ""
+    for ch in s1:
+        if ch == " " or ch.isdigit():
+            continue
+        if ch in s2 and ch not in result:
+            if ch != " " and not ch.isdigit():
+                result += ch
+    return result
+print("11 esep: ", common_unique_chars("hello world 123", "yellow bird"))
+
+
+
 
 
 
