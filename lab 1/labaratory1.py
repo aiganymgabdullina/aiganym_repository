@@ -314,3 +314,24 @@ def max_subarray_sum(nums, k):
     return max_sum
 print("20 esep: ", max_subarray_sum([1,2,3,-1,4,5],2))
 
+#21 esep
+task21 = lambda lst: [
+    s.upper()
+    for s in lst
+    if s.isalpha() and len(s) > 4 and len(set(s)) == len(s)]
+print("21 esep: ",task21(["Hello", "World", "Python", "abcde", "Letter", "Code1"]))
+
+#22 esep
+def group_by_parity_and_sort(nums):
+    jup = []
+    taq = []
+    for num in nums:
+        if num % 2 == 0:
+            jup.append(num)
+        else:
+            taq.append(num)
+    jup.sort()
+    taq.sort()
+    return jup + taq
+print("22 esep: ", group_by_parity_and_sort([5, 2, 8, 1, 4, 7]))
+
