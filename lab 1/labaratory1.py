@@ -546,3 +546,8 @@ def group_by_length(words):
             result[length].append(word)
     return result
 print("11 esep: ", group_by_length( ["cat", "dog", "hi", "hello", "cat", "sun"]))
+
+#12 esep
+result = lambda s: {word for word in s
+                    if word.isalpha() and len(word) >4 and len(set(word))==len(word)}
+print("12 esep: ", result({"apple", "world", "python", "abcde", "letter1", "level"}))
