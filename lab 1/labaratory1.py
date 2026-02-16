@@ -515,3 +515,16 @@ def sort_dict_by_value_length(d):
     return items
 print("8 esep: ", sort_dict_by_value_length({"a": "cat","b": "elephant","c": "dog","d": "hi"}))
 
+#9 esep
+def common_elements_all(sets_list):
+    if not sets_list:
+        return set()
+    common = sets_list[0].copy()
+    for current_set in sets_list[1:]:
+        new_common = set()
+        for i in common:
+            if i in current_set:
+                new_common.add(i)
+        common = new_common
+    return common
+print("9 esep: ", common_elements_all([ {1, 2, 3, 4}, {2, 3, 5},{0, 2, 3, 8}]))
