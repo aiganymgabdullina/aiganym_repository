@@ -335,3 +335,14 @@ def group_by_parity_and_sort(nums):
     return jup + taq
 print("22 esep: ", group_by_parity_and_sort([5, 2, 8, 1, 4, 7]))
 
+
+#23 esep
+result = lambda lst: list(
+    filter(
+        lambda x: x % 2 != 0 and x > sum(lst)/len(lst),
+        [lst[i] for i in range(len(lst)) 
+         if i > 1 and all(i % d != 0 for d in range(2, int(i**0.5) + 1))] ))
+print("23 esep: ",result([3,7,2,9,5,8,11,4,13]) )
+
+
+#24 esep
