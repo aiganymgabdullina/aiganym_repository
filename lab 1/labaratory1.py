@@ -402,3 +402,23 @@ result = lambda a,b: list(filter(
     lambda x: x not in b and x > sum(a) /len(a), a
 ))
 print("29 esep: ", result([1,5,7,2,9],[2,3,7]))
+
+#30 esep
+def analyze_strings_list(words):
+    result = []
+    for word in words:
+        digit = False
+        for i in word:
+            if i.isdigit():
+                digit = True
+                break
+        if digit:
+            continue
+        if len(word) % 2 == 0:
+            new_w = word[::-1]
+        else:
+            new_w = word.upper()
+        if new_w not in result:
+            result.append(new_w)
+    return result
+print("30 esep: ", analyze_strings_list(["hello", "test1", "world", "hi", "hello", "abc"]))
