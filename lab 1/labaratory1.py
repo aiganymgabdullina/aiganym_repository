@@ -482,3 +482,8 @@ def filter_sets(sets_list):
 sets_list = [{1,2,3,4}, {1, -2,3,4},{5,7,9,11}, {2,4,6,8,10}]
 print("4 esep: ", filter_sets(sets_list))
 
+#5 esep
+result = lambda d: sorted(d.keys(),
+       key = lambda k: (-d[k],k))[:5]
+a = {"apple":10, "banana":5, "cherry":10, "fig":5, "grape":12}
+print("5 esep: ", result(a))
