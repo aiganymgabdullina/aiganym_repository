@@ -528,3 +528,9 @@ def common_elements_all(sets_list):
         common = new_common
     return common
 print("9 esep: ", common_elements_all([ {1, 2, 3, 4}, {2, 3, 5},{0, 2, 3, 8}]))
+
+#10 esep
+result = lambda d: {key: sorted([x for x in values if x%2 != 0])
+                    for key, values in d.items()
+                    if any(x%2 != 0 for x in values)}
+print("10 esep: ", result({"a": [1, 2, 3, 4],"b": [2, 4, 6],"c": [5, 7, 8]}))
