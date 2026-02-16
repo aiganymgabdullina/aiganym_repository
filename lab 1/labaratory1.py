@@ -368,3 +368,12 @@ result = lambda lst: list(
     map(lambda x: sum(x) / len(x),
         filter(lambda x: len(x) >= 3 and sum(x) % 2 == 0, lst)))
 print("25 esep: ", result([[1,2,3], [2,4,6],[1,1],[5,5,2]]))
+
+#26 esep
+def remove_duplicates_keep_last(nums):
+    result = []
+    for i in range(len(nums)):
+        if nums[i] not in nums[i+1:]:
+            result.append(nums[i])
+    return result
+print("26 esep: ", remove_duplicates_keep_last([1,2,3,2,4,1,5]))
