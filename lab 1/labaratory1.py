@@ -446,3 +446,16 @@ result = lambda numbers: {
     and x % 5 != 0}
 print("2 esep: ", result({2,3,7,9,10,15}))
 
+#3 esep
+def merge_dicts_sum(d1, d2):
+    result = {}
+    for key in d1:
+        result[key] = d1[key]
+    for key in d2:
+        if key in result:
+            result[key] += d2[key]
+        else:
+            result[key] = d2[key]
+    return result
+print("3 esep: ", merge_dicts_sum({"a": 10, "b":20, "c":30}, {"b":5, "c":15, "d":40}))
+
