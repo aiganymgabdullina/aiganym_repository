@@ -534,3 +534,15 @@ result = lambda d: {key: sorted([x for x in values if x%2 != 0])
                     for key, values in d.items()
                     if any(x%2 != 0 for x in values)}
 print("10 esep: ", result({"a": [1, 2, 3, 4],"b": [2, 4, 6],"c": [5, 7, 8]}))
+
+#11 esep
+def group_by_length(words):
+    result = {}
+    for word in words:
+        length = len(word)
+        if length not in result:
+            result[length] = []
+        if word not in result[length]:
+            result[length].append(word)
+    return result
+print("11 esep: ", group_by_length( ["cat", "dog", "hi", "hello", "cat", "sun"]))
