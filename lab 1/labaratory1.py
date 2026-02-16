@@ -507,3 +507,11 @@ print("6 esep: ", {"a": 10,"b": [1, 2, 3],"c": {"d": 5,"e": [4, 6],"f": { "g": 7
 result = lambda s1, s2 : {x for x in (s1.symmetric_difference(s2))
                           if x%2 == 0}
 print("7 esep: ", result({1,2,3,4},{3,4,5,6} ))
+
+#8 esep
+def sort_dict_by_value_length(d):
+    items = list(d.items())
+    items.sort(key=lambda x: (len(x[1]), x[0]))
+    return items
+print("8 esep: ", sort_dict_by_value_length({"a": "cat","b": "elephant","c": "dog","d": "hi"}))
+
