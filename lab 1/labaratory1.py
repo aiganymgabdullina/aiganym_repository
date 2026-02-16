@@ -362,3 +362,9 @@ def longest_increasing_sublist(nums):
         longest = current
     return longest
 print("24 esep: ", longest_increasing_sublist([1,2,2,3,4,1,2,3,4,5]))
+
+#25 esep
+result = lambda lst: list(
+    map(lambda x: sum(x) / len(x),
+        filter(lambda x: len(x) >= 3 and sum(x) % 2 == 0, lst)))
+print("25 esep: ", result([[1,2,3], [2,4,6],[1,1],[5,5,2]]))
