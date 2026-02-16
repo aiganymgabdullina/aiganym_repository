@@ -396,3 +396,9 @@ def moving_average(nums,k):
             result.append(sum(window)/k)
     return result
 print('28 esep: ', moving_average([1,2,3,-1,4,5,6], 3))
+
+#29 esep
+result = lambda a,b: list(filter(
+    lambda x: x not in b and x > sum(a) /len(a), a
+))
+print("29 esep: ", result([1,5,7,2,9],[2,3,7]))
