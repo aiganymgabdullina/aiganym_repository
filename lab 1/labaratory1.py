@@ -487,3 +487,18 @@ result = lambda d: sorted(d.keys(),
        key = lambda k: (-d[k],k))[:5]
 a = {"apple":10, "banana":5, "cherry":10, "fig":5, "grape":12}
 print("5 esep: ", result(a))
+
+#6 esep
+def deep_sum(d):
+    zhalpy = 0
+    for key in d:
+        value = d[key]
+        if isinstance(value, int) or isinstance(value, float):
+            zhalpy += value
+        elif isinstance(value, list):
+            for num in value:
+                zhalpy += num
+        elif isinstance(value, dict):
+            zhalpy += deep_sum(value)
+    return zhalpy
+print("6 esep: ", {"a": 10,"b": [1, 2, 3],"c": {"d": 5,"e": [4, 6],"f": { "g": 7 } }})
