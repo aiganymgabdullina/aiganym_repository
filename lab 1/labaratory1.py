@@ -422,3 +422,27 @@ def analyze_strings_list(words):
             result.append(new_w)
     return result
 print("30 esep: ", analyze_strings_list(["hello", "test1", "world", "hi", "hello", "abc"]))
+
+#DICT AND SET
+print("DICT AND SET ")
+#1 esep
+def invert_unique(d):
+    result = {}
+    for key in d:
+        value = d[key]
+        if value not in result:
+            result[value] = []
+        if key not in result[value]:
+            result[value].append(key)
+    return result
+d = {"a": 1, "b": 2, "c": 1, "d": 2,"e": 3}
+print("1 esep: ", invert_unique(d))
+
+#2 esep
+result = lambda numbers: {
+    x for x in numbers
+    if x > sum(numbers) / len(numbers)
+    and x % 2 != 0
+    and x % 5 != 0}
+print("2 esep: ", result({2,3,7,9,10,15}))
+
