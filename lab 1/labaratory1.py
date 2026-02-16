@@ -377,3 +377,7 @@ def remove_duplicates_keep_last(nums):
             result.append(nums[i])
     return result
 print("26 esep: ", remove_duplicates_keep_last([1,2,3,2,4,1,5]))
+
+#27th esep
+result = lambda words: sorted(words, key = lambda x: (-len(x), x))[:5]
+print("27 esep: ", result(["cat", "dog", "tiger", "lion", "bear", "elephant"]))
