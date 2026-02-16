@@ -1,4 +1,7 @@
 #1 esep
+from operator import truediv
+
+
 def analyze_text(text):
     text1 = text.lower()
     text2 = ""
@@ -458,4 +461,24 @@ def merge_dicts_sum(d1, d2):
             result[key] = d2[key]
     return result
 print("3 esep: ", merge_dicts_sum({"a": 10, "b":20, "c":30}, {"b":5, "c":15, "d":40}))
+
+#4 esep
+def filter_sets(sets_list):
+    result = []
+    for s in sets_list:
+        if len(s) <= 3:
+            continue
+        negative = False
+        jup = False
+        for x in s:
+            if x < 0:
+                negative = True
+                break
+            if x%2 == 0:
+                jup = True
+        if not negative and jup:
+            result.append(s)
+    return result
+sets_list = [{1,2,3,4}, {1, -2,3,4},{5,7,9,11}, {2,4,6,8,10}]
+print("4 esep: ", filter_sets(sets_list))
 
