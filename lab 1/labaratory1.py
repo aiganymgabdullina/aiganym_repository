@@ -502,3 +502,8 @@ def deep_sum(d):
             zhalpy += deep_sum(value)
     return zhalpy
 print("6 esep: ", {"a": 10,"b": [1, 2, 3],"c": {"d": 5,"e": [4, 6],"f": { "g": 7 } }})
+
+#7 esep
+result = lambda s1, s2 : {x for x in (s1.symmetric_difference(s2))
+                          if x%2 == 0}
+print("7 esep: ", result({1,2,3,4},{3,4,5,6} ))
