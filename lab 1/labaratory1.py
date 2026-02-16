@@ -551,3 +551,20 @@ print("11 esep: ", group_by_length( ["cat", "dog", "hi", "hello", "cat", "sun"])
 result = lambda s: {word for word in s
                     if word.isalpha() and len(word) >4 and len(set(word))==len(word)}
 print("12 esep: ", result({"apple", "world", "python", "abcde", "letter1", "level"}))
+
+#13 esep
+def invert_dict_strict(d):
+    result = {}
+    counts = {}
+    for key in d:
+        value = d[key]
+        if value not in counts:
+            counts[value] = 1
+        else:
+            counts[value] += 1
+    for key in d:
+        value = d[key]
+        if counts[value] == 1:
+            result[value] = key
+    return result
+print("13 esep: ", invert_dict_strict({"a": 1, "b": 2,"c": 1,"d": 3}))
