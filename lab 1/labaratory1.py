@@ -378,6 +378,21 @@ def remove_duplicates_keep_last(nums):
     return result
 print("26 esep: ", remove_duplicates_keep_last([1,2,3,2,4,1,5]))
 
-#27th esep
+#27 esep
 result = lambda words: sorted(words, key = lambda x: (-len(x), x))[:5]
 print("27 esep: ", result(["cat", "dog", "tiger", "lion", "bear", "elephant"]))
+
+#28 esep
+def moving_average(nums,k):
+    result = []
+    for i in range(len(nums)-k+1):
+        window = nums[i:i+k]
+        negative = False
+        for x in window:
+            if x < 0:
+                negative = True
+                break
+        if not negative:
+            result.append(sum(window)/k)
+    return result
+print('28 esep: ', moving_average([1,2,3,-1,4,5,6], 3))
