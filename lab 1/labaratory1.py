@@ -346,3 +346,19 @@ print("23 esep: ",result([3,7,2,9,5,8,11,4,13]) )
 
 
 #24 esep
+def longest_increasing_sublist(nums):
+    if not nums:
+        return []
+    longest = []
+    current = [nums[0]]
+    for i in range(1, len(nums)):
+        if nums[i] > nums[i-1]:
+            current.append(nums[i])
+        else:
+            if len(current) > len(longest):
+                longest = current
+            current = [nums[i]]
+    if len(current) > len(longest):
+        longest = current
+    return longest
+print("24 esep: ", longest_increasing_sublist([1,2,2,3,4,1,2,3,4,5]))
