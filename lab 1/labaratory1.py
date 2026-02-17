@@ -594,3 +594,13 @@ filter_dict = lambda d: {key: value
     for key, value in d.items()
     if value >= (sum(d.values()) / len(d)) and value % 2 != 0}
 print("15 esep: ", filter_dict({"a": 10, "b": 15,  "c": 7, "d": 20, "e": 13}))
+
+#16 esep
+def update_counts(d, items):
+    for item in items:
+        if item in d:
+            d[item] += 1
+        else:
+            d[item] = 1
+    return d
+print("16 esep: ", update_counts({"apple": 2, "banana": 1}, ["apple", "orange", "banana", "apple"]))
