@@ -1,7 +1,4 @@
 #1 esep
-from operator import truediv
-
-
 def analyze_text(text):
     text1 = text.lower()
     text2 = ""
@@ -625,4 +622,18 @@ def sort_dict_by_value_sum(d):
     pairs.sort(key=lambda x: (-x[1], x[0]))
     return pairs
 print("18 esep: ", sort_dict_by_value_sum({"apple": [1, 2, 3], "banana": [4, 1], "cherry": [2, 2, 2]}))
+
+
+#19 esep
+def filter_by_digit_sum(nums):
+    result = set()
+    for num in nums:
+        if num % 2 != 0:
+            digit_sum = 0
+            for digit in str(abs(num)):
+                digit_sum += int(digit)
+            if digit_sum % 2 == 0:
+                result.add(num)
+    return result
+print("19 esep: ", filter_by_digit_sum({12, 13, 25, 31, 44, 57}))
 
