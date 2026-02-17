@@ -637,3 +637,9 @@ def filter_by_digit_sum(nums):
     return result
 print("19 esep: ", filter_by_digit_sum({12, 13, 25, 31, 44, 57}))
 
+
+#20 esep
+top3_keys = lambda d: [key for key, value in sorted(d.items(), key=lambda x: (x[1], len(x[0])))][:3]
+
+print("20 esep: ", top3_keys({ "apple": 5, "kiwi": 2, "banana": 2, "fig": 1, "pear": 3}))
+
