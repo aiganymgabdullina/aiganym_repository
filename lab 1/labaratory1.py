@@ -588,3 +588,9 @@ def top_k_frequent(nums, k):
         count += 1
     return result
 print("14 esep: ", top_k_frequent([1,1,1,2,2,3,4,4], 2))
+
+#15 esep
+filter_dict = lambda d: {key: value
+    for key, value in d.items()
+    if value >= (sum(d.values()) / len(d)) and value % 2 != 0}
+print("15 esep: ", filter_dict({"a": 10, "b": 15,  "c": 7, "d": 20, "e": 13}))
