@@ -126,9 +126,7 @@ filter_words = lambda s: list(
         lambda w: len(w) >= 4
         and w.isalpha()
         and len(set(w.lower())) == len(w),
-        s.split()
-    )
-)
+        s.split()))
 text = "apple moon pencil  school sun sky"
 print("6 esep: ", filter_words(text))
 
@@ -568,3 +566,25 @@ def invert_dict_strict(d):
             result[value] = key
     return result
 print("13 esep: ", invert_dict_strict({"a": 1, "b": 2,"c": 1,"d": 3}))
+
+#14 esep
+def top_k_frequent(nums, k):
+    freq = {}
+    for num in nums:
+        if num in freq:
+            freq[num] += 1
+        else:
+            freq[num] = 1
+    items = []
+    for num in freq:
+        items.append((num, freq[num]))
+    items.sort(key=lambda x: (-x[1], x[0]))
+    result = set()
+    count = 0
+    for item in items:
+        if count == k:
+            break
+        result.add(item[0])
+        count += 1
+    return result
+print("14 esep: ", top_k_frequent([1,1,1,2,2,3,4,4], 2))
