@@ -613,3 +613,16 @@ b = {3, 4, 5, 6}
 c = {4, 7}
 
 print("17 esep:", set_filter(a, b, c))
+
+#18 esep
+def sort_dict_by_value_sum(d):
+    pairs = []
+    for key in d:
+        jalpy = 0
+        for num in d[key]:
+            jalpy += num
+        pairs.append((key, jalpy))
+    pairs.sort(key=lambda x: (-x[1], x[0]))
+    return pairs
+print("18 esep: ", sort_dict_by_value_sum({"apple": [1, 2, 3], "banana": [4, 1], "cherry": [2, 2, 2]}))
+
