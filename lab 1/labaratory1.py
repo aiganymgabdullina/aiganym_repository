@@ -604,3 +604,12 @@ def update_counts(d, items):
             d[item] = 1
     return d
 print("16 esep: ", update_counts({"apple": 2, "banana": 1}, ["apple", "orange", "banana", "apple"]))
+
+
+#17 esep
+set_filter = lambda a, b, c: a.intersection(b).difference(c)
+a = {1, 2, 3, 4}
+b = {3, 4, 5, 6}
+c = {4, 7}
+
+print("17 esep:", set_filter(a, b, c))
