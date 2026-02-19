@@ -643,3 +643,8 @@ top3_keys = lambda d: [key for key, value in sorted(d.items(), key=lambda x: (x[
 
 print("20 esep: ", top3_keys({ "apple": 5, "kiwi": 2, "banana": 2, "fig": 1, "pear": 3}))
 
+#21 esep
+
+
+
+
