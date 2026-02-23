@@ -88,4 +88,66 @@ with open("hight_salary.csv", "w") as f:
     a = csv.DictWriter(f, fieldnames=["name", "department", "salary"])
     a.writeheader()
     a.writerows(hight_salary_employees)
+print("Отчет успешно создан!")
 
+#3 esep
+print("3 esep")
+import json
+with open("orders.json", "w") as f:
+    f.write("""
+[
+  {
+    "order_id": 1,
+    "user": "Ali",
+    "items": ["phone", "case"],
+    "total": 300000
+  },
+  {
+    "order_id": 2,
+    "user": "Dana",
+    "items": ["laptop"],
+    "total": 800000
+  },
+  {
+    "order_id": 3,
+    "user": "Ali",
+    "items": ["mouse", "keyboard"],
+    "total": 70000
+  }
+]
+""")
+with open("orders.json", "r") as f:
+    orders = json.load(f)
+total_revenue = 0
+user_orders = {}
+item_counts = {}
+most_expensive_order = 0
+top_user = ""
+total_items_sold = 0
+for order in orders:
+    user = order["user"]
+    total = order["total"]
+    items = order["items"]
+    total_revenue += total
+    if user not in user_orders:
+        user_orders[user] = 0
+    user_orders[user] += 1
+    if total > most_expensive_order:
+        most_expensive_order = total
+        top_user = user
+    total_items_sold += len(items)
+    for item in items:
+        if item not in item_counts:
+            item_counts[item] = 0
+        item_counts[item] += 1
+most_popular_item = max(item_counts, key=item_counts.get)
+
+
+with open("summary.json", "w") as f:
+    f.write("{\n")
+    f.write(f'  "total_revenue": {total_revenue},\n')
+    f.write(f'  "top_user": "{top_user}",\n')
+    f.write(f'  "most_popular_item": "{most_popular_item}",\n')
+    f.write(f'  "total_orders": {len(orders)}\n')
+    f.write("}")
+print("Отчет успешно создан!")
