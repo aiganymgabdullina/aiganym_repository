@@ -1,5 +1,13 @@
 #1 esep
 print("1 esep")
+with open("shop_logs.txt", "w") as f:
+    f.write("2026-02-01;user_1;LOGIN\n")
+    f.write("2026-02-01;user_2;LOGIN\n")
+    f.write("2026-02-01;user_1;BUY;120\n")
+    f.write("2026-02-01;user_3;LOGIN\n")
+    f.write("2026-02-01;user_2;BUY;300\n")
+    f.write("2026-02-01;user_1;BUY;50\n")
+    f.write("2026-02-01;user_2;LOGOUT\n")
 f=open("shop_logs.txt","r")
 unique_users= set()
 total_buys=0
@@ -51,6 +59,14 @@ print("Отчет успешно создан!")
 #2 esep
 print("2 esep")
 import csv
+with open("employees.csv", "w", encoding="utf-8") as f:
+    f.write("name,department,salary\n")
+    f.write("Ali,IT,500000\n")
+    f.write("Dana,HR,300000\n")
+    f.write("Arman,IT,600000\n")
+    f.write("Aruzhan,Marketing,400000\n")
+    f.write("Dias,IT,450000\n")
+
 employees = []
 departments = {}
 total_salary = 0
