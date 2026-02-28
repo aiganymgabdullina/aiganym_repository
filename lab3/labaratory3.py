@@ -13,3 +13,8 @@ print(words_sorted)
 numbers = [5, 12, 7, 20, 33, 8]
 numbers_filtered = list(filter(lambda x: x%2 ==0 and x>10 , numbers))
 print(numbers_filtered)
+
+#ЗАДАЧА 4
+numbers = [1, 2, 3, 4, 5, 6]
+numbers_chek = list(map(lambda x: x**2 if x%2 ==0 else x*3, numbers))
+print(numbers_chek)
