@@ -18,3 +18,9 @@ print(numbers_filtered)
 numbers = [1, 2, 3, 4, 5, 6]
 numbers_chek = list(map(lambda x: x**2 if x%2 ==0 else x*3, numbers))
 print(numbers_chek)
+
+#ЗАДАЧА 5
+compare = lambda a, b: "a больше" if a>b else("равны" if a==b else "b больше")
+print(compare(10, 7))
+print(compare(3, 5))
+print(compare(4, 4))
