@@ -24,3 +24,8 @@ compare = lambda a, b: "a больше" if a>b else("равны" if a==b else "b
 print(compare(10, 7))
 print(compare(3, 5))
 print(compare(4, 4))
+
+#ЗАДАЧА 6
+numbers = [0, -3, 5, -7, 8]
+result =  [(lambda x: "положительное" if x>0 else("ноль" if x==0 else "отрицательное"))(x) for x in numbers]
+print(result)
