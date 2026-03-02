@@ -104,3 +104,8 @@ print(new_words)
 numbers = [1,2,3,4,5]
 numbers_dict = {n: "четное" if n%2 == 0 else "нечетное" for n in numbers}
 print(numbers_dict)
+
+#ЗАДАЧА 5
+matrix = [[1,2], [3,4], [5,6]]
+matrix_new = [element for list1 in matrix for element in list1]
+print(matrix_new)
