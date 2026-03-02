@@ -99,3 +99,8 @@ print(new_matrix)
 words = ["кот", "машина", "ананас", "дом"]
 new_words = [word for word in words if len(word)>4 and "а" not in word]
 print(new_words)
+
+#ЗАДАЧА 4
+numbers = [1,2,3,4,5]
+numbers_dict = {n: "четное" if n%2 == 0 else "нечетное" for n in numbers}
+print(numbers_dict)
