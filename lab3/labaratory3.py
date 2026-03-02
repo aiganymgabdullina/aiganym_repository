@@ -29,3 +29,18 @@ print(compare(4, 4))
 numbers = [0, -3, 5, -7, 8]
 result =  [(lambda x: "положительное" if x>0 else("ноль" if x==0 else "отрицательное"))(x) for x in numbers]
 print(result)
+
+
+#ГЕНЕРАТОРЫ
+#ЗАДАЧА 1
+def even_numbers(n):
+    for i in range(1, n+1):
+        if i%4 ==0:
+            yield "кратно 4"
+        else:
+            yield i
+
+for x in even_numbers(10):
+    print(x)
+
+#ЗАДАЧА 2
