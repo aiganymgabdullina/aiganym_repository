@@ -92,7 +92,10 @@ print(numbers_squares)
 
 #ЗАДАЧА 2
 matrix = [[1,2,3], [4,5,6], [7,8,9]]
-
 new_matrix = [ (lambda x: 1 if not x else x[0] * x[1] * x[2])(x) for x in matrix ]
-
 print(new_matrix)
+
+#ЗАДАЧА 3
+words = ["кот", "машина", "ананас", "дом"]
+new_words = [word for word in words if len(word)>4 and "а" not in word]
+print(new_words)
