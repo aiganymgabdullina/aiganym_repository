@@ -109,3 +109,7 @@ print(numbers_dict)
 matrix = [[1,2], [3,4], [5,6]]
 matrix_new = [element for list1 in matrix for element in list1]
 print(matrix_new)
+
+#ЗАДАЧА 6
+new_list = ["FizzBuzz" if n % 3 == 0 and n % 5 == 0 else "Fizz" if n % 3 == 0 else "Buzz" if n % 5 == 0 else n for n in range(1, 21)]
+print(new_list)
