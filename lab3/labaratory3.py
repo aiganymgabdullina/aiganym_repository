@@ -29,9 +29,9 @@ print(compare(4, 4))
 numbers = [0, -3, 5, -7, 8]
 result =  [(lambda x: "положительное" if x>0 else("ноль" if x==0 else "отрицательное"))(x) for x in numbers]
 print(result)
+print("------------------------------------------------------------------------------")
 
-
-#ГЕНЕРАТОРЫ
+print("ГЕНЕРАТОРЫ")
 #ЗАДАЧА 1
 def even_numbers(n):
     for i in range(1, n+1):
@@ -83,3 +83,10 @@ def squares(n):
             yield a
 for x in squares(5):
     print(x)
+
+print("------------------------------------------------------------------------------")
+print("Итераторы и comprehension")
+#ЗАДАЧА 1
+numbers_squares = [n**2 for n in range(1, 21) if n%2 ==0]
+
+print(numbers_squares)
