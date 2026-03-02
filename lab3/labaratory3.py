@@ -72,3 +72,14 @@ def infinite_numbers():
 a = infinite_numbers()
 for x in range(16):
     print(next(a))
+
+#ЗАДАЧА 4
+def squares(n):
+    for i in range(1, n+1):
+        a= i**2
+        if a%2 ==0:
+            yield "четный квадрат"
+        else:
+            yield a
+for x in squares(5):
+    print(x)
