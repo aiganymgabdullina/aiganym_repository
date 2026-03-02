@@ -44,3 +44,14 @@ for x in even_numbers(10):
     print(x)
 
 #ЗАДАЧА 2
+def filter_words(words):
+    for i in words:
+        if len(i) > 4:
+            if "а" in i:
+                yield "c a"
+            else:
+                yield i
+
+words = ["кот", "машина", "арбуз", "дом"]
+for w in filter_words(words):
+    print(w)
