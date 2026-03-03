@@ -140,3 +140,9 @@ def special_numbers(n):
             yield i
 for x in special_numbers(15):
     print(x)
+
+
+#ЗАДАЧА 2
+words = ["кот", "машина", "арбуз", "дом", "ананас"]
+words_2 = [(lambda word: (word.upper() if len(word)>4 else "short" ) +( "*" if "a" in word else ""))(word)for word in words]
+print(words_2)
