@@ -146,3 +146,13 @@ for x in special_numbers(15):
 words = ["кот", "машина", "арбуз", "дом", "ананас"]
 words_2 = [(lambda word: (word.upper() if len(word)>4 else "short" ) +( "*" if "a" in word else ""))(word)for word in words]
 print(words_2)
+
+#ЗАДАЧА 3
+def process_numbers(numbers):
+    gen = (num for num in numbers)
+    numbers_filtered = filter(lambda x: x>= 0, gen)
+    processed = map(lambda x: x/2 if x%2 ==0 else x*3+1, numbers_filtered)
+    return processed
+numbers = [5, -2, 8, 0, -7, 3]
+for x in process_numbers(numbers):
+    print(x)
