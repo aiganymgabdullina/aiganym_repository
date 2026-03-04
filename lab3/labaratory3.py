@@ -192,3 +192,8 @@ print("Задачи для понимания map and filter")
 numbers = [1, 2, 3, 4, 5]
 numbers_map = list(map(lambda n: n*2, numbers ))
 print(numbers_map)
+
+#ЗАДАЧА 2
+words = ["кот", "машина", "арбуз", "дом"]
+words_map = list(map(lambda word: word.upper() + "!" if len(word)>3 else word.upper(), words))
+print(words_map)
