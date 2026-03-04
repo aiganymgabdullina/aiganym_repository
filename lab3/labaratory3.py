@@ -197,3 +197,8 @@ print(numbers_map)
 words = ["кот", "машина", "арбуз", "дом"]
 words_map = list(map(lambda word: word.upper() + "!" if len(word)>3 else word.upper(), words))
 print(words_map)
+
+#ЗАДАЧА 3
+numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+numbers_new = list(filter(lambda n : n%2 == 0, numbers))
+print(numbers_new)
