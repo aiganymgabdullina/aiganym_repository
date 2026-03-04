@@ -184,3 +184,11 @@ matrix = [
 ]
 for x in matrix_transform(matrix):
     print(x)
+
+print("------------------------------------------------------------------------------")
+print("Задачи для понимания map and filter")
+
+#ЗАДАЧА 1
+numbers = [1, 2, 3, 4, 5]
+numbers_map = list(map(lambda n: n*2, numbers ))
+print(numbers_map)
