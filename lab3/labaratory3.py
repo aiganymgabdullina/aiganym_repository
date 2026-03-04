@@ -157,8 +157,30 @@ numbers = [5, -2, 8, 0, -7, 3]
 for x in process_numbers(numbers):
     print(x)
 
+
+
 #ЗАДАЧА 4
 students = [("Иван", 85), ("Анна", 72), ("Пётр", 90), ("Мария", 60)]
 grades = lambda x : ("отлично" if x >= 90 else("хорошо" if x <90 and x >= 70 else "Удовлетворительно"))
 students_dict = {name: grades(x) for name, x in students}
 print(students_dict)
+
+
+#ЗАДАЧА 5
+def matrix_transform(matrix):
+    for n in (num for list1 in matrix for num in list1):
+        if n%2 ==0 and n%3 ==0:
+            yield "кратно 6"
+        elif n%2 ==0:
+            yield "чётное"
+        elif n%3 ==0 :
+            yield "кратно 3"
+        else :
+            yield n
+matrix = [
+[1, 2, 3],
+[4, 5, 6],
+[7, 8, 9]
+]
+for x in matrix_transform(matrix):
+    print(x)
