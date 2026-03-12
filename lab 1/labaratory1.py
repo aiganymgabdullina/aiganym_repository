@@ -644,7 +644,19 @@ top3_keys = lambda d: [key for key, value in sorted(d.items(), key=lambda x: (x[
 print("20 esep: ", top3_keys({ "apple": 5, "kiwi": 2, "banana": 2, "fig": 1, "pear": 3}))
 
 #21 esep
+def count_leaf_values(d):
+    total = 0
+    for value in d.values():
+        if isinstance(value, dict):
+            total += count_leaf_values(value)
+        elif isinstance(value, list):
+            total += len(value)
+        else:
+            total += 1
+    return total
+d = {"a": 5, "b": [1, 2, 3],"c": {"d": 10, "e": [4, 5]}}
 
+print("21 esep:", count_leaf_values(d))
 
 
 

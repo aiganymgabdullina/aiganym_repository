@@ -1,8 +1,9 @@
 #ЗАДАЧА  1
-chek = lambda x: "положительное" if x> 0 else ("ноль" if x == 0 else "отрицательное")
+chek = lambda x: "положительное" if x> 0 else "ноль" if x == 0 else "отрицательное"
 print(chek(-5))
 print(chek(0))
 print(chek(2))
+
 
 #ЗАДАЧА 2
 words = ["арбуз", "кот", "машина", "дом", "ананас"]
@@ -35,6 +36,8 @@ print("ГЕНЕРАТОРЫ")
 #ЗАДАЧА 1
 def even_numbers(n):
     for i in range(1, n+1):
+
+
         if i%4 ==0:
             yield "кратно 4"
         else:
@@ -207,3 +210,5 @@ print(numbers_new)
 numbers = [0, 5, 12, 7, 20, -3, 8]
 numbers_map = list(map(lambda n: n/2 if n%2==0 else n*3, filter(lambda n: n>5 , numbers)))
 print(numbers_map)
+
+
