@@ -664,5 +664,17 @@ set1 = {1, 5, 7, 10, 12}
 set2 = {2, 4,6, 8}
 print("22 esep", find_elements(set1, set2))
 
+#23 esep
+def group_by_last_letter(words):
+    result = {}
+    for word in words:
+        last_letter = word[-1]
+        if last_letter not in result:
+            result[last_letter] = []
+        if word not in result[last_letter]:
+            result[last_letter].append(word)
+    return result
+words = ["apple", "table", "people", "apple", "cake", "bike", "make"]
 
+print("23 esep:", group_by_last_letter(words))
 
