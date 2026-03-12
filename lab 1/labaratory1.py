@@ -658,5 +658,11 @@ d = {"a": 5, "b": [1, 2, 3],"c": {"d": 10, "e": [4, 5]}}
 
 print("21 esep:", count_leaf_values(d))
 
+#22 esep
+find_elements = lambda set1, set2: {x for x in set1 if x>(sum(set2)/len(set2)) and x not in set2}
+set1 = {1, 5, 7, 10, 12}
+set2 = {2, 4,6, 8}
+print("22 esep", find_elements(set1, set2))
+
 
 
