@@ -692,3 +692,8 @@ def union_of_filtered_sets(sets_list):
 
 sets_list = [{5,11,14,17}, {3,9,13,20},{7,15,22,25}]
 print("24 esep:", union_of_filtered_sets(sets_list))
+
+#25 esep
+process_dict = lambda data: {key: (lambda product= 1:[product:= product * x for x in values if x>0 ] and product)() for key, values in data.items() if any(x>0 for x in values)}
+data = {"a": [1, -2, 3],"b": [-5, -1],"c": [2, 4, -3],"d": [5]}
+print("25 esep", process_dict(data))
