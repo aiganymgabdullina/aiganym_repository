@@ -678,3 +678,17 @@ words = ["apple", "table", "people", "apple", "cake", "bike", "make"]
 
 print("23 esep:", group_by_last_letter(words))
 
+
+#24 esep
+def union_of_filtered_sets(sets_list):
+    result = set()
+    for numbers in sets_list:
+        filtered = set()
+        for n in numbers:
+            if n>10 and n%2 !=0:
+                filtered.add(n)
+        result = result.union(filtered)
+    return result
+
+sets_list = [{5,11,14,17}, {3,9,13,20},{7,15,22,25}]
+print("24 esep:", union_of_filtered_sets(sets_list))
