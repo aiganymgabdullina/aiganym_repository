@@ -750,3 +750,20 @@ print("28 esep", sorted_unique_chars(strings))
 sort_keys = lambda data: sorted(data.keys(), key = lambda k: (data[k]%10, k))
 data = { "apple": 23,"banana": 15,"cherry": 42, "date": 35, "fig": 12}
 print("29 esep:",sort_keys(data))
+
+#30 esep
+def partition_by_sum_parity(numbers):
+    jup_set = set()
+    taq_set = set()
+    for num in numbers:
+        digit_sum = 0
+        for d in str(num):
+            digit_sum += int(d)
+        if digit_sum%2 == 0:
+            jup_set.add(num)
+        else:
+            taq_set.add(num)
+    return (jup_set, taq_set)
+
+s = {12, 23, 34, 45, 56, 71}
+print("30 esep:", partition_by_sum_parity(s))
