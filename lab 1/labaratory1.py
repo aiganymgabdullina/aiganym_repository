@@ -767,3 +767,8 @@ def partition_by_sum_parity(numbers):
 
 s = {12, 23, 34, 45, 56, 71}
 print("30 esep:", partition_by_sum_parity(s))
+
+#31 esep
+filter_dict = lambda data: {key: values for key, values in data.items() if len(values) == len(set(values)) and all(len(v)>3 for v in values)}
+data = {"a": ["apple", "pear", "plum"], "b": ["dog", "cat", "bird"],  "c": ["table", "chair", "lamp"], "d": ["tree", "tree", "grass"]}
+print("31 esep:", filter_dict(data))
