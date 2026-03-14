@@ -697,3 +697,25 @@ print("24 esep:", union_of_filtered_sets(sets_list))
 process_dict = lambda data: {key: (lambda product= 1:[product:= product * x for x in values if x>0 ] and product)() for key, values in data.items() if any(x>0 for x in values)}
 data = {"a": [1, -2, 3],"b": [-5, -1],"c": [2, 4, -3],"d": [5]}
 print("25 esep", process_dict(data))
+
+#26 esep
+def remove_elements_with_common_digits(nums):
+    digit_count = {}
+    for num in nums:
+        for d in str(num):
+            if d not in digit_count:
+                digit_count[d] = 1
+            else:
+                digit_count[d] += 1
+    result = set()
+    for num in nums:
+        keep = True
+        for d in str(num):
+            if digit_count[d] > 1:
+                keep = False
+                break
+        if keep:
+            result.add(num)
+    return result
+s = {12, 34, 56, 78, 91}
+print("26 esep:", remove_elements_with_common_digits(s))

@@ -38,6 +38,7 @@ def even_numbers(n):
     for i in range(1, n+1):
 
 
+
         if i%4 ==0:
             yield "кратно 4"
         else:
