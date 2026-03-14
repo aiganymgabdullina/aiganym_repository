@@ -719,3 +719,16 @@ def remove_elements_with_common_digits(nums):
     return result
 s = {12, 34, 56, 78, 91}
 print("26 esep:", remove_elements_with_common_digits(s))
+
+#27 esep
+def is_prime(n):
+    if n <= 1:
+        return False
+    for i in range(2, n):
+        if n % i == 0:
+            return False
+    return True
+
+filter_dict = lambda data : {key: value for key, value in data.items() if is_prime(value) and len(key)%2 !=0}
+data = {"one": 2,"four": 4, "seven": 7,"ten": 10,"cat": 3}
+print("27 esep:", filter_dict(data))
