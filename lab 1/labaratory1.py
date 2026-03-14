@@ -772,3 +772,15 @@ print("30 esep:", partition_by_sum_parity(s))
 filter_dict = lambda data: {key: values for key, values in data.items() if len(values) == len(set(values)) and all(len(v)>3 for v in values)}
 data = {"a": ["apple", "pear", "plum"], "b": ["dog", "cat", "bird"],  "c": ["table", "chair", "lamp"], "d": ["tree", "tree", "grass"]}
 print("31 esep:", filter_dict(data))
+
+#32 esep
+def pairwise_intersections(sets_list):
+    if len(sets_list)<2:
+        return  []
+    result = []
+    for i in range(len(sets_list)-1):
+        intersect = sets_list[i].intersection(sets_list[i+1])
+        result.append(intersect)
+    return result
+sets_list = [ {1, 2, 3}, {2, 3, 4}, {3, 4, 5}]
+print("32 esep:", pairwise_intersections(sets_list))
