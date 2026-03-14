@@ -732,3 +732,16 @@ def is_prime(n):
 filter_dict = lambda data : {key: value for key, value in data.items() if is_prime(value) and len(key)%2 !=0}
 data = {"one": 2,"four": 4, "seven": 7,"ten": 10,"cat": 3}
 print("27 esep:", filter_dict(data))
+
+#28 esep
+def sorted_unique_chars(strings):
+    chars = set()
+    for word in strings:
+        for ch in word:
+            if not ch.isdigit() and ch != "":
+                chars.add(ch)
+    result = list(chars)
+    result.sort()
+    return result
+strings = ["hello 123", "world 45", "python"]
+print("28 esep", sorted_unique_chars(strings))
