@@ -745,3 +745,8 @@ def sorted_unique_chars(strings):
     return result
 strings = ["hello 123", "world 45", "python"]
 print("28 esep", sorted_unique_chars(strings))
+
+#29 esep
+sort_keys = lambda data: sorted(data.keys(), key = lambda k: (data[k]%10, k))
+data = { "apple": 23,"banana": 15,"cherry": 42, "date": 35, "fig": 12}
+print("29 esep:",sort_keys(data))
