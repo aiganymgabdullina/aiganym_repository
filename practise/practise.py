@@ -1,39 +1,44 @@
-with open("new_file","w", encoding="utf-8") as f:
-    f.write("aiganym\n")
-    f.write("Privet\n")
+from flask import Flask, jsonify
+from flasgger import Swagger
 
-with open("numbers.txt", "w") as f1:
-    for i in range(1, 11):
-        f1.write(str(i) + "\n")
+app = Flask(__name__)
+swagger = Swagger(app)
 
+def my_task():
+    result = sum(range(1, 1000000))
+    return result
 
-with open("students.txt", "w", encoding="utf-8" ) as f2:
-    name = input()
-    names = name.split()
-    for n in names:
-        f2.write(n.title() + "\n")
-    print()
+@app.route('/run-task')
+def run_task():
+    """
+    ---
+    responses:
+      200:
+        description: Результат выполнения my_task
+    """
+    return jsonify({"status": "ok", "result": my_task()})
 
-with open("students.txt", "r", encoding="utf-8") as f2:
-    for a in f2:
-        print(name.strip().title())
+@app.route('/sum')
+def sum_ab():
+    """
+    ---
+    responses:
+      200:
+        description: Результат сложения
+    """
+    a = 5
+    b = 3
+    return str(a + b)
 
-import csv
-with open("data.csv", "w", encoding="utf-8") as f:
-    f.write("aiganym")
+@app.route('/')
+def home():
+    """
+    ---
+    responses:
+      200:
+        description: Главная страница
+    """
+    return "Сервер работает"
 
-import csv
-with open("numbers.csv", "w") as f1:
-    for i in range(1, 11):
-        f1.write(str(i) + "\n")
-
-import csv
-with open("students.csv", "w", encoding="utf-8" ) as f2:
-    name = input()
-    names = name.split()
-    for n in names:
-        f2.write(n.title() + "\n")
-    print()
-with open("students.csv", "r", encoding="utf-8") as f2:
-    for a in f2:
-        print(name.strip().title())
+if __name__ == '__main__':
+    app.run(port=5000)
