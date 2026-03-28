@@ -1,12 +1,15 @@
+#1 esep
 from flask import Flask
 from flasgger import Swagger
 
 app = Flask(__name__)
 swagger = Swagger(app)
+
 class Player:
     def __init__(self, player_id: int, name: str, hp: int):
         self._id = player_id
         self._name = name.strip().title()
+
         if hp < 0:
             self._hp = 0
         else:
@@ -17,17 +20,35 @@ class Player:
 
     def __del__(self):
         print(f"Player {self._name} удалён")
-
-def create_player():
-    return Player(1, " john ", 120)
-
 @app.route('/')
 def home():
     return "Сервер работает"
-
 @app.route('/player')
 def player_info():
-    p = create_player()
+    p = Player(1, " john ", 120)
+    return str(p)
+
+#2 esep
+class PlayerString(Player):
+    @classmethod
+    def from_string(cls, data: str):
+        parts = data.split(',')
+
+        if len(parts) != 3:
+            return "Ошибка: неверный формат"
+
+        try:
+            player_id = int(parts[0].strip())
+            name = parts[1].strip()
+            hp = int(parts[2].strip())
+        except:
+            return "Ошибка: данные не корректны"
+
+        return cls(player_id, name, hp)
+
+@app.route('/player-from-string')
+def player_from_string():
+    p = PlayerString.from_string("2, alice , 90")
     return str(p)
 
 if __name__ == '__main__':
