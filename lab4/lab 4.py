@@ -72,5 +72,39 @@ def item_info():
     i = Item(1, " Sword ", 50)
     return str(i)
 
+#4 esep
+class Inventory:
+    def __init__(self):
+        self.items = []
+
+    def add_item(self, item):
+        for i in self.items:
+            if i.id == item.id:
+                return
+        self.items.append(item)
+
+    def remove_item(self, item_id: int):
+        self.items = [i for i in self.items if i.id != item_id]
+
+    def get_items(self):
+        return self.items
+
+    def unique_items(self):
+        return set(self.items)
+
+    def to_dict(self):
+        return {item.id: item for item in self.items}
+
+@app.route('/inventory')
+def inventory_test():
+    inv = Inventory()
+    inv.add_item(Item(1, "Sword", 50))
+    inv.add_item(Item(2, "Shield", 30))
+    result = ""
+    for item in inv.get_items():
+        result += str(item) + "\n"
+    result += "Уникальных: " + str(len(inv.unique_items()))
+    return result
+
 if __name__ == '__main__':
     app.run(port=5001)
