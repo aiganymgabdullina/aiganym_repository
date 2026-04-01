@@ -51,5 +51,26 @@ def player_from_string():
     p = PlayerString.from_string("2, alice , 90")
     return str(p)
 
+#3 esep
+class Item:
+    def __init__(self, item_id: int, name: str, power: int):
+        self.id = item_id
+        self.name = name.strip().title()
+        self.power = power
+
+    def __str__(self):
+        return f"Item(id={self.id}, name='{self.name}', power={self.power})"
+
+    def __eq__(self, other):
+        return self.id == other.id
+
+    def __hash__(self):
+        return hash(self.id)
+
+@app.route('/item')
+def item_info():
+    i = Item(1, " Sword ", 50)
+    return str(i)
+
 if __name__ == '__main__':
     app.run(port=5001)
