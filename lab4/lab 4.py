@@ -121,5 +121,21 @@ def strong_items():
 
     return "<br>".join(str(i) for i in inv.get_strong_items(50))
 
+#6 esep
+from datetime import datetime
+class Event:
+    def __init__(self, event_type: str, data: dict):
+        self.type = event_type
+        self.data = data
+        self.timestamp = datetime.now()
+
+    def __str__(self):
+        return f"Event(type='{self.type}', data={self.data}, timestamp='{self.timestamp}')"
+
+@app.route('/event')
+def event_test():
+    e = Event("ATTACK", {"damage": 20})
+    return str(e)
+
 if __name__ == '__main__':
     app.run(port=5001)
