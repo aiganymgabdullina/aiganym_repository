@@ -4,7 +4,7 @@ from flasgger import Swagger
 
 app = Flask(__name__)
 swagger = Swagger(app)
-
+#1 esep
 class Player:
     def __init__(self, player_id: int, name: str, hp: int):
         self._id = player_id
@@ -20,6 +20,24 @@ class Player:
 
     def __del__(self):
         print(f"Player {self._name} удалён")
+
+#2 esep
+    @classmethod
+    def from_string(cls, data: str):
+        parts = data.split(',')
+
+        if len(parts) != 3:
+            raise ValueError("Неверный формат строки")
+
+        try:
+            player_id = int(parts[0].strip())
+            name = parts[1].strip()
+            hp = int(parts[2].strip())
+        except:
+            raise ValueError("Ошибка преобразования данных")
+
+        return cls(player_id, name, hp)
+
 @app.route('/')
 def home():
     return "Сервер работает"
@@ -27,29 +45,13 @@ def home():
 def player_info():
     p = Player(1, " john ", 120)
     return str(p)
-
-#2 esep
-class PlayerString(Player):
-    @classmethod
-    def from_string(cls, data: str):
-        parts = data.split(',')
-
-        if len(parts) != 3:
-            return "Ошибка: неверный формат"
-
-        try:
-            player_id = int(parts[0].strip())
-            name = parts[1].strip()
-            hp = int(parts[2].strip())
-        except:
-            return "Ошибка: данные не корректны"
-
-        return cls(player_id, name, hp)
-
 @app.route('/player-from-string')
 def player_from_string():
-    p = PlayerString.from_string("2, alice , 90")
-    return str(p)
+    try:
+        p = Player.from_string("2, alice , 90")
+        return str(p)
+    except ValueError as e:
+        return f"Ошибка: {e}"
 
 #3 esep
 class Item:
@@ -95,6 +97,10 @@ class Inventory:
     def to_dict(self):
         return {item.id: item for item in self.items}
 
+    # 5 esep
+    def get_strong_items(self, min_power: int):
+        return ([item for item in self.items if item.power >= min_power])
+
 @app.route('/inventory')
 def inventory_test():
     inv = Inventory()
@@ -105,6 +111,15 @@ def inventory_test():
         result += str(item) + "\n"
     result += "Уникальных: " + str(len(inv.unique_items()))
     return result
+
+@app.route('/strong-items')
+def strong_items():
+    inv = Inventory()
+    inv.add_item(Item(1, "Sword", 50))
+    inv.add_item(Item(2, "Shield", 30))
+    inv.add_item(Item(3, "Axe", 70))
+
+    return "<br>".join(str(i) for i in inv.get_strong_items(50))
 
 if __name__ == '__main__':
     app.run(port=5001)
