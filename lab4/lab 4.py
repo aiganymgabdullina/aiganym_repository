@@ -9,6 +9,7 @@ class Player:
     def __init__(self, player_id: int, name: str, hp: int):
         self._id = player_id
         self._name = name.strip().title()
+        self.inventory = Inventory()
 
         if hp < 0:
             self._hp = 0
@@ -136,6 +137,40 @@ class Event:
 def event_test():
     e = Event("ATTACK", {"damage": 20})
     return str(e)
+
+
+#7 esep
+class Warrior(Player):
+    def handle_event(self, event):
+        if event.type == "ATTACK":
+            damage = event.data.get("damage", 0)
+            damage = int(damage * 0.9)  # -10%
+            self._hp -= damage
+        else:
+            super().handle_event(event)
+
+
+class Mage(Player):
+    def handle_event(self, event):
+        if event.type == "LOOT":
+            item = event.data.get("item")
+            if item:
+                item.power = int(item.power * 1.1)  # +10%
+                self.inventory.add_item(item)
+        else:
+            super().handle_event(event)
+
+@app.route('/event-test')
+def event_test_route():
+    w = Warrior(1, "Arman", 100)
+    m = Mage(2, "Aigerim", 100)
+
+    attack = Event("ATTACK", {"damage": 50})
+    loot = Event("LOOT", {"item": Item(1, "Sword", 50)})
+
+    w.handle_event(attack)
+    m.handle_event(loot)
+    return f"Warrior HP: {w._hp}<br>Mage Item Power: {m.inventory.get_items()[0].power}"
 
 if __name__ == '__main__':
     app.run(port=5001)
