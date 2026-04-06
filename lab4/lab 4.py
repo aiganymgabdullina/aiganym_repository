@@ -215,5 +215,25 @@ def read_logs():
         result += str(e) + "<br>"
     return result
 
+#10 esep
+class EventIterator:
+    def __init__(self, events):
+        self.events = events
+        self.index = 0
+    def __iter__(self):
+        return self
+    def __next__(self):
+        if self.index >= len(self.events):
+            raise StopIteration
+        event = self.events[self.index]
+        self.index += 1
+        return event
+events = [
+    Event("ATTACK", {"damage": 10}),
+    Event("HEAL", {"heal": 5}),
+    Event("LOOT", {"item": Item(1, "Sword", 50)})]
+iterator = EventIterator(events)
+for e in iterator:
+    print(e)
 if __name__ == '__main__':
     app.run(port=5001)
