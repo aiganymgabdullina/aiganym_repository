@@ -162,8 +162,8 @@ class Mage(Player):
 
 @app.route('/event-test')
 def event_test_route():
-    w = Warrior(1, "Arman", 100)
-    m = Mage(2, "Aigerim", 100)
+    w = Warrior(1, "Aiganym", 100)
+    m = Mage(2, "Akzhan", 100)
 
     attack = Event("ATTACK", {"damage": 50})
     loot = Event("LOOT", {"item": Item(1, "Sword", 50)})
@@ -171,6 +171,49 @@ def event_test_route():
     w.handle_event(attack)
     m.handle_event(loot)
     return f"Warrior HP: {w._hp}<br>Mage Item Power: {m.inventory.get_items()[0].power}"
+
+#8 esep
+class Logger:
+    def log(self, event, player, filename: str):
+        line = f"{event.timestamp};{player._id};{event.type};{event.data}\n"
+
+        with open(filename, "a", encoding="utf-8") as f:
+            f.write(line)
+#9 esep
+    def read_logs(self, filename: str):
+        events = []
+        with open(filename, "r", encoding="utf-8") as f:
+            for line in f:
+                parts = line.strip().split(";")
+                if len(parts) != 4:
+                    continue
+
+                timestamp = parts[0]
+                player_id = int(parts[1])
+                event_type = parts[2]
+                data = eval(parts[3])
+                e = Event(event_type, data)
+                e.timestamp = timestamp
+                events.append(e)
+
+        return events
+
+@app.route('/log-test')
+def log_test():
+    p = Player(1, "Aiganym", 100)
+    e = Event("ATTACK", {"damage": 50})
+    logger = Logger()
+    logger.log(e, p, "log.txt")
+    return "Событие записано"
+
+@app.route('/read-logs')
+def read_logs():
+    logger = Logger()
+    events = logger.read_logs("log.txt")
+    result = ""
+    for e in events:
+        result += str(e) + "<br>"
+    return result
 
 if __name__ == '__main__':
     app.run(port=5001)
