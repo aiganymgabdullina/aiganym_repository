@@ -280,7 +280,13 @@ def analyze():
         Event("ATTACK", {"damage": 10, "player_id": 1}),
         Event("ATTACK", {"damage": 5, "player_id": 2}),
         Event("HEAL", {"heal": 5})]
-
     return str(analyze_logs(events))
+
+#14 esep
+decide_action = lambda player: "HEAL" if player._hp < 50 else ("LOOT" if not player.inventory.get_items() else "ATTACK")
+@app.route('/decide')
+def decide():
+    p = Player(1, "Aiganym", 40)
+    return decide_action(p)
 if __name__ == '__main__':
     app.run(port=5001)
