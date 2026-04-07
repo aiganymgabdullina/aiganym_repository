@@ -131,6 +131,9 @@ class Event:
         self.timestamp = datetime.now()
 
     def __str__(self):
+        data_str = {}
+        for k, v in self.data.items():
+            data_str[k] = str(v)
         return f"Event(type='{self.type}', data={self.data}, timestamp='{self.timestamp}')"
 
 @app.route('/event')
@@ -249,5 +252,12 @@ events = [
 for dmg in damage_stream(events):
     print(dmg)
 
+#12 esep
+def generate_events(players, items, n):
+    return [Event("ATTACK", {"damage": 10}) for _ in range(n)]
+@app.route('/generate')
+def generate():
+    events = generate_events([], [], 3)
+    return "<br>".join(str(e) for e in events)
 if __name__ == '__main__':
     app.run(port=5001)
