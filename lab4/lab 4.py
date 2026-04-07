@@ -288,5 +288,31 @@ decide_action = lambda player: "HEAL" if player._hp < 50 else ("LOOT" if not pla
 def decide():
     p = Player(1, "Aiganym", 40)
     return decide_action(p)
+
+#15 esep
+class Warrior(Player):
+    def handle_event(self, event):
+        if event.type == "ATTACK":
+            damage = int(event.data.get("damage", 0) * 0.9)
+            self._hp -= damage
+        else:
+            super().handle_event(event)
+
+class Mage(Player):
+    def handle_event(self, event):
+        if event.type == "LOOT":
+            item = event.data.get("item")
+            if item:
+                item.power = int(item.power * 1.1)
+                self.inventory.add_item(item)
+        else:
+            super().handle_event(event)
+
+w = Warrior(1, "Warrior", 100)
+m = Mage(2, "Mage", 100)
+w.handle_event(Event("ATTACK", {"damage": 50}))
+m.handle_event(Event("LOOT", {"item": Item(1, "Sword", 50)}))
+print(w._hp)
+print(m.inventory.get_items()[0])
 if __name__ == '__main__':
     app.run(port=5001)
