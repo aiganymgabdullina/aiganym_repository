@@ -259,5 +259,28 @@ def generate_events(players, items, n):
 def generate():
     events = generate_events([], [], 3)
     return "<br>".join(str(e) for e in events)
+
+#13 esep
+def analyze_logs(events):
+    total = sum(e.data.get("damage", 0) for e in events if e.type == "ATTACK")
+    players = {}
+    types = {}
+    for e in events:
+        types[e.type] = types.get(e.type, 0) + 1
+        if e.type == "ATTACK":
+            pid = e.data.get("player_id", 0)
+            players[pid] = players.get(pid, 0) + e.data.get("damage", 0)
+    top_player = max(players, key=players.get) if players else None
+    most_common = max(types, key=types.get)
+    return {"total_damage": total,"top_player": top_player,"most_common_event": most_common}
+
+@app.route('/analyze')
+def analyze():
+    events = [
+        Event("ATTACK", {"damage": 10, "player_id": 1}),
+        Event("ATTACK", {"damage": 5, "player_id": 2}),
+        Event("HEAL", {"heal": 5})]
+
+    return str(analyze_logs(events))
 if __name__ == '__main__':
     app.run(port=5001)
