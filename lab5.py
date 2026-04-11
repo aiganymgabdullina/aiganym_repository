@@ -51,3 +51,40 @@ def test_from_string():
             "str_repr": str(u) }
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
+
+#3 esep
+class Product:
+    def __init__(self, product_id: int, name: str, price: float, category: str):
+        self.id = product_id
+        self.name = name.strip().title()
+        self.price = float(price)
+        self.category = category.strip().capitalize()
+
+    def __str__(self):
+        return f"Product(id={self.id}, name='{self.name}', price={self.price}, category='{self.category}')"
+
+    def __eq__(self, other):
+        if not isinstance(other, Product):
+            return False
+        return self.id == other.id
+
+    def __hash__(self):
+        return hash(self.id)
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "price": self.price,
+            "category": self.category}
+
+@app.get("/product/test")
+def test_product():
+    p1 = Product(1, " Laptop ", 1200.0, "electronics")
+    p2 = Product(1, "LAPTOP NEW", 1300.0, "electronics")
+    products_set = {p1, p2}
+    return {
+        "p1_string": str(p1),
+        "are_equal": p1 == p2,  # True, так как id одинаковые
+        "unique_count": len(products_set),  # Будет 1, потому что __hash__ их объединит
+        "as_dict": p1.to_dict()}
