@@ -85,6 +85,52 @@ def test_product():
     products_set = {p1, p2}
     return {
         "p1_string": str(p1),
-        "are_equal": p1 == p2,  # True, так как id одинаковые
-        "unique_count": len(products_set),  # Будет 1, потому что __hash__ их объединит
+        "are_equal": p1 == p2,
+        "unique_count": len(products_set),
         "as_dict": p1.to_dict()}
+
+#4 esep
+class Inventory:
+    def __init__(self):
+        self._products = []
+
+    def add_product(self, product: Product):
+        if not any(p.id == product.id for p in self._products):
+            self._products.append(product)
+
+    def remove_product(self, product_id: int):
+        self._products = [p for p in self._products if p.id != product_id]
+
+    def get_product(self, product_id: int):
+        for p in self._products:
+            if p.id == product_id:
+                return p
+        return None
+
+    def get_all_products(self):
+        return self._products
+
+    def unique_products(self):
+        return set(self._products)
+
+    def to_dict(self):
+        return {p.id: p for p in self._products}
+
+
+@app.get("/inventory/test")
+def test_inventory():
+    inv = Inventory()
+    p1 = Product(101, "Mouse", 25.0, "Peripherals")
+    p2 = Product(102, "Keyboard", 45.0, "Peripherals")
+    p3 = Product(101, "Duplicate Mouse", 30.0, "Peripherals")  # Тот же ID
+
+    inv.add_product(p1)
+    inv.add_product(p2)
+    inv.add_product(p3)
+
+    return {
+        "all_items": [str(p) for p in inv.get_all_products()],
+        "count": len(inv.get_all_products()),
+        "search_102": str(inv.get_product(102)),
+        "inventory_dict": {p_id: str(p_obj) for p_id, p_obj in inv.to_dict().items()}
+    }
