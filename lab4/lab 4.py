@@ -4,7 +4,7 @@ from flasgger import Swagger
 
 app = Flask(__name__)
 swagger = Swagger(app)
-#1 esep
+
 class Player:
     def __init__(self, player_id: int, name: str, hp: int):
         self._id = player_id
