@@ -148,3 +148,71 @@ def test_filter():
     return {
         "expensive_count": len(expensive_products),
         "names": [p.name for p in expensive_products]}
+
+#6 esep
+import datetime
+class Logger:
+    @staticmethod
+    def log_action(user, action: str, product, filename: str = "actions.log"):
+        now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        line = f"{now};{user._id};{action};{product.id}\n"
+
+        with open(filename, "a", encoding="utf-8") as f:
+            f.write(line)
+
+    @staticmethod
+    def read_logs(filename: str = "actions.log"):
+        logs = []
+        try:
+            with open(filename, "r", encoding="utf-8") as f:
+                for line in f:
+                    parts = line.strip().split(";")
+                    logs.append({
+                        "timestamp": parts[0],
+                        "user_id": int(parts[1]),
+                        "action": parts[2],
+                        "product_id": int(parts[3])})
+        except FileNotFoundError:
+            pass
+        return logs
+
+@app.get("/test-log")
+def test_log():
+    u = User(1, "Aiganym", "test@mail.com")
+    p = Product(101, "Laptop", 1200.0, "Tech")
+    Logger.log_action(u, "ADD_TO_CART", p)
+    return Logger.read_logs()
+
+#7 esep
+class Order:
+    def __init__(self, order_id: int, user):
+        self.id = order_id
+        self.user = user
+        self.products = []
+
+    def add_product(self, product):
+        self.products.append(product)
+
+    def remove_product(self, product_id: int):
+        self.products = [p for p in self.products if p.id != product_id]
+
+    def total_price(self) -> float:
+        return sum(p.price for p in self.products)
+
+    def __str__(self):
+        return f"Order(id={self.id}, user={self.user._name}, total={self.total_price()})"
+
+@app.get("/order-test")
+def test_order():
+    u = User(1, "Aiganym", "test@mail.com")
+    p1 = Product(101, "Laptop", 1200.0, "Tech")
+    p2 = Product(102, "Mouse", 25.0, "Tech")
+
+    my_order = Order(555, u)
+    my_order.add_product(p1)
+    my_order.add_product(p2)
+
+    return {
+        "order_info": str(my_order),
+        "total": my_order.total_price(),
+        "items": [p.name for p in my_order.products]}
