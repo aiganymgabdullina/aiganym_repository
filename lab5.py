@@ -247,3 +247,34 @@ def test_stream():
     gen = price_stream(products)
     prices = [p for p in gen]
     return {"streamed_prices": prices}
+
+
+# 10 esep
+class OrderIterator:
+    def __init__(self, orders: list):
+        self._orders = orders
+        self._index = 0
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self._index < len(self._orders):
+            order = self._orders[self._index]
+            self._index += 1
+            return order
+        else:
+            raise StopIteration
+@app.get("/orders/test-iterator")
+def test_iterator():
+    u = User(1, "Aiganym", "test@mail.com")
+    o1 = Order(10, u)
+    o2 = Order(20, u)
+    o3 = Order(30, u)
+
+    orders_list = [o1, o2, o3]
+    iterator = OrderIterator(orders_list)
+    result_ids = []
+    for order in iterator:
+        result_ids.append(order.id)
+    return {"iterated_order_ids": result_ids,"total_count": len(result_ids)}
