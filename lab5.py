@@ -201,6 +201,10 @@ class Order:
 
     def __str__(self):
         return f"Order(id={self.id}, user={self.user._name}, total={self.total_price()})"
+    #8 esep
+    def most_expensive_products(self, n: int) -> list:
+        sorted_products = sorted(self.products, key=lambda p: p.price, reverse=True)
+        return sorted_products[:n]
 
 @app.get("/order-test")
 def test_order():
@@ -216,3 +220,15 @@ def test_order():
         "order_info": str(my_order),
         "total": my_order.total_price(),
         "items": [p.name for p in my_order.products]}
+
+
+@app.get("/order/analytics")
+def test_analytics():
+    u = User(1, "Aiganym", "test@mail.com")
+    my_order = Order(777, u)
+    my_order.add_product(Product(1, "Mouse", 25.0, "Tech"))
+    my_order.add_product(Product(2, "Laptop", 1200.0, "Tech"))
+    my_order.add_product(Product(3, "Monitor", 300.0, "Tech"))
+    top_products = my_order.most_expensive_products(2)
+
+    return {"top_expensive": [p.name for p in top_products]}
