@@ -323,3 +323,17 @@ def get_normalized():
     prices = np.array([1200.0, 25.0, 450.0])
     normalized = normalize_prices(prices)
     return [round(float(x), 4) for x in normalized]
+
+
+# 14 esep
+def get_category_array(products: list):
+    return np.array([p.category for p in products])
+
+
+@app.get("/products/categories")
+def get_categories():
+    products = [
+        Product(1, "Laptop", 1200.0, "Electronics"),
+        Product(2, "T-Shirt", 20.0, "Clothing")]
+    categories_arr = get_category_array(products)
+    return categories_arr.tolist()
