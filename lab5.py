@@ -349,3 +349,20 @@ def get_unique_count():
     categories = np.array(["Electronics", "Clothing", "Electronics"])
     count = count_unique_categories(categories)
     return int(count)
+
+
+# 16 esep
+def get_above_average_products(products: list, price_array):
+    mean_price = np.mean(price_array)
+    return [p for p in products if p.price > mean_price]
+
+
+@app.get("/products/above-average")
+def get_expensive_items():
+    products = [
+        Product(1, "Laptop", 1200.0, "Electronics"),
+        Product(2, "Mouse", 25.0, "Electronics"),
+        Product(3, "Monitor", 450.0, "Electronics")]
+    prices = np.array([p.price for p in products])
+    result = get_above_average_products(products, prices)
+    return [f"Product({p.id}, {p.name}, {p.price}, {p.category})" for p in result]
