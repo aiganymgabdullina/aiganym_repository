@@ -407,3 +407,14 @@ def average_order():
     order_sums = np.array([1200.0, 1225.0])
     result = get_average_order_value(order_sums)
     return float(result)
+
+
+# 20 esep
+def get_expensive_order_indices(order_sums_array, threshold=1000):
+    indices = np.where(order_sums_array > threshold)[0]
+    return indices
+@app.get("/orders/expensive-indices")
+def expensive_indices():
+    order_sums = np.array([1200.0, 900.0, 1500.0])
+    indices = get_expensive_order_indices(order_sums)
+    return indices.tolist()
