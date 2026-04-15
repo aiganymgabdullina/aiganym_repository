@@ -22,6 +22,16 @@ class Player:
     def __del__(self):
         print(f"Player {self._name} удалён")
 
+    #7
+    def handle_event(self, event: Event):
+        if event.type == "ATTACK":
+            damage = event.data.get("damage", 0)
+            self._hp -= damage
+        elif event.type == "HEAL":
+            healing = event.data.get("amount", 0)
+            self._hp += healing
+        print(f"{self._name} өңделді: {event.type}")
+
 #2 esep
     @classmethod
     def from_string(cls, data: str):
