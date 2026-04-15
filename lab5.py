@@ -385,18 +385,25 @@ def get_discounted_prices():
 def create_order_matrix(orders_list: list):
     matrix_data = [[order.total_price()] for order in orders_list]
     return np.array(matrix_data)
-
-
 @app.get("/orders/matrix")
 def get_matrix():
     u1 = User(1, "Aiganym", "test1@mail.com")
     u2 = User(2, "Duman", "test2@mail.com")
-
     o1 = Order(1, u1)
     o1.add_product(Product(1, "Laptop", 1200.0, "Electronics"))
-
     o2 = Order(2, u2)
     o2.add_product(Product(2, "Mouse", 25.0, "Electronics"))
     o2.add_product(Product(1, "Laptop", 1200.0, "Electronics"))
     order_matrix = create_order_matrix([o1, o2])
     return order_matrix.tolist()
+
+
+# 19 esep
+def get_average_order_value(order_sums_array):
+    return np.mean(order_sums_array)
+
+@app.get("/analytics/average-order")
+def average_order():
+    order_sums = np.array([1200.0, 1225.0])
+    result = get_average_order_value(order_sums)
+    return float(result)
