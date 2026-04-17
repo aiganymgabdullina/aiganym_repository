@@ -262,67 +262,6 @@ events = [
 for dmg in damage_stream(events):
     print(dmg)
 
-#12 esep
-def generate_events(players, items, n):
-    return [Event("ATTACK", {"damage": 10}) for _ in range(n)]
-@app.route('/generate')
-def generate():
-    events = generate_events([], [], 3)
-    return "<br>".join(str(e) for e in events)
 
-#13 esep
-def analyze_logs(events):
-    total = sum(e.data.get("damage", 0) for e in events if e.type == "ATTACK")
-    players = {}
-    types = {}
-    for e in events:
-        types[e.type] = types.get(e.type, 0) + 1
-        if e.type == "ATTACK":
-            pid = e.data.get("player_id", 0)
-            players[pid] = players.get(pid, 0) + e.data.get("damage", 0)
-    top_player = max(players, key=players.get) if players else None
-    most_common = max(types, key=types.get)
-    return {"total_damage": total,"top_player": top_player,"most_common_event": most_common}
-
-@app.route('/analyze')
-def analyze():
-    events = [
-        Event("ATTACK", {"damage": 10, "player_id": 1}),
-        Event("ATTACK", {"damage": 5, "player_id": 2}),
-        Event("HEAL", {"heal": 5})]
-    return str(analyze_logs(events))
-
-#14 esep
-decide_action = lambda player: "HEAL" if player._hp < 50 else ("LOOT" if not player.inventory.get_items() else "ATTACK")
-@app.route('/decide')
-def decide():
-    p = Player(1, "Aiganym", 40)
-    return decide_action(p)
-
-#15 esep
-class Warrior(Player):
-    def handle_event(self, event):
-        if event.type == "ATTACK":
-            damage = int(event.data.get("damage", 0) * 0.9)
-            self._hp -= damage
-        else:
-            super().handle_event(event)
-
-class Mage(Player):
-    def handle_event(self, event):
-        if event.type == "LOOT":
-            item = event.data.get("item")
-            if item:
-                item.power = int(item.power * 1.1)
-                self.inventory.add_item(item)
-        else:
-            super().handle_event(event)
-
-w = Warrior(1, "Warrior", 100)
-m = Mage(2, "Mage", 100)
-w.handle_event(Event("ATTACK", {"damage": 50}))
-m.handle_event(Event("LOOT", {"item": Item(1, "Sword", 50)}))
-print(w._hp)
-print(m.inventory.get_items()[0])
 if __name__ == '__main__':
     app.run(port=5001)
