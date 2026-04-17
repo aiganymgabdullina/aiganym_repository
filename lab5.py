@@ -302,6 +302,7 @@ def test_numpy_prices():
 def get_price_analysis(price_array):
     return (np.mean(price_array), np.median(price_array))
 
+
 @app.get("/analytics/prices")
 def get_stats():
     prices = np.array([1200.0, 25.0, 450.0])
@@ -434,6 +435,9 @@ def create_users_df(users: list):
         })
     df = pd.DataFrame(data)
     return df
+users = [User(1, "Aiganym", "aiganym@narxoz.kz")]
+df = create_users_df(users)
+print(df)
 
 @app.get("/pandas/users", response_class=HTMLResponse)
 def get_users_html_table():
@@ -564,3 +568,37 @@ def get_category_avg_html():
     df = pd.DataFrame(data)
     result_df = get_mean_price_by_category(df)
     return result_df.to_html(classes="table table-secondary", index=False, border=1)
+
+
+# 29 esep
+def add_discount_column(df):
+    df['discounted_price'] = df['price'] * 0.9
+    return df
+@app.get("/pandas/products/discount", response_class=HTMLResponse)
+def get_discounted_products_html():
+    data = {
+        "id": [1, 2],
+        "name": ["Laptop", "Mouse"],
+        "price": [1200, 25]
+    }
+    df = pd.DataFrame(data)
+    result_df = add_discount_column(df)
+    return result_df.to_html(classes="table table-hover", index=False, border=1)
+
+
+# 30 esep
+def sort_products_by_price(df):
+    sorted_df = df.sort_values(by='price', ascending=False)
+    return sorted_df
+
+
+@app.get("/pandas/products/sort", response_class=HTMLResponse)
+def get_sorted_products_html():
+    data = {
+        "id": [1, 2, 3],
+        "name": ["Laptop", "Mouse", "Monitor"],
+        "price": [1200, 25, 450]
+    }
+    df = pd.DataFrame(data)
+    result_df = sort_products_by_price(df)
+    return result_df.to_html(classes="table table-danger", index=False, border=1)
