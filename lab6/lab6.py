@@ -70,3 +70,12 @@ anomalies = df[df['col_2'] > threshold].copy()
 print("#7")
 print(threshold)
 print(anomalies.head())
+
+#8 esep
+target_cols = [f'col_{i}' for i in range(2, 12)]
+subset = df[target_cols].copy()
+for col in target_cols:
+    subset[col] = pd.to_numeric(subset[col], errors='coerce')
+correlation_matrix = subset.corr()
+print("#8")
+print(correlation_matrix.iloc[:3, :3].round(2))
