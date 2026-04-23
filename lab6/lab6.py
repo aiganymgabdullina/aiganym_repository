@@ -60,3 +60,13 @@ stats = subset.agg(['mean', 'median', 'std']).T
 stats_df = stats.reset_index().rename(columns={'index': 'column'})
 print("#6")
 print(stats_df)
+
+#7 esep
+df['col_2'] = pd.to_numeric(df['col_2'], errors='coerce')
+mean_price = df['col_2'].mean()
+std_price = df['col_2'].std()
+threshold = mean_price + 3 * std_price
+anomalies = df[df['col_2'] > threshold].copy()
+print("#7")
+print(threshold)
+print(anomalies.head())
