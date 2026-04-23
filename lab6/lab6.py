@@ -79,3 +79,15 @@ for col in target_cols:
 correlation_matrix = subset.corr()
 print("#8")
 print(correlation_matrix.iloc[:3, :3].round(2))
+
+#9 esep
+import pandas as pd
+import matplotlib.pyplot as plt
+df['col_2'] = pd.to_numeric(df['col_2'], errors='coerce')
+plt.figure(figsize=(10, 6))
+plt.hist(df['col_2'].dropna(), bins=50, color='skyblue', edgecolor='black')
+plt.title('Распределение цен товаров (col_2)')
+plt.xlabel('Цена товаров')
+plt.ylabel('Количество товаров')
+plt.grid(axis='y', alpha=0.75)
+plt.show()
