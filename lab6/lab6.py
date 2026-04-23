@@ -50,3 +50,13 @@ category_analysis = df.groupby('col_7').agg(
 category_analysis = category_analysis.rename(columns={'col_7': 'category'})
 print("#5")
 print(category_analysis)
+
+#6 esep
+target_cols = [f'col_{i}' for i in range(2, 12)]
+subset = df[target_cols].copy()
+for col in target_cols:
+    subset[col] = pd.to_numeric(subset[col], errors='coerce')
+stats = subset.agg(['mean', 'median', 'std']).T
+stats_df = stats.reset_index().rename(columns={'index': 'column'})
+print("#6")
+print(stats_df)
