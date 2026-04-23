@@ -1,6 +1,7 @@
 #1 esep
 import pandas as pd
 df = pd.read_excel('catalog_products.xlsx')
+print("#1")
 print(f"Форма DataFrame: {df.shape}")
 print("\nТипы данных:")
 print(df.dtypes)
@@ -19,4 +20,13 @@ for col in cols_to_fix:
     df[col] = df[col].fillna(df[col].mean())
 df[cols_to_fix].dtypes.head()
 df[cols_to_fix].isnull().sum().head()
+print("#2")
 print(df[['col_2', 'col_3']].head())
+
+#3 esep
+import numpy as np
+df['total_value'] = df['col_2'] * df['col_3']
+df['double_stock'] = df['col_5'] * 2
+df['log_price'] = np.log(df['col_2'])
+print("#3")
+print(df[['total_value', 'double_stock', 'log_price']].head())
