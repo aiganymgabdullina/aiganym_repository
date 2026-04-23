@@ -91,3 +91,20 @@ plt.xlabel('Цена товаров')
 plt.ylabel('Количество товаров')
 plt.grid(axis='y', alpha=0.75)
 plt.show()
+
+#10 esep
+#10
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+df['col_2'] = pd.to_numeric(df['col_2'], errors='coerce')
+df['col_3'] = pd.to_numeric(df['col_3'], errors='coerce')
+plt.figure(figsize=(10, 6))
+sns.regplot(x='col_2', y='col_3', data=df,
+            scatter_kws={'alpha':0.5, 'color':'blue'},
+            line_kws={'color':'red'})
+plt.title('Взаимосвязь цены и количества товара на складе')
+plt.xlabel('Цена ')
+plt.ylabel('Количество на складе')
+plt.grid(True, linestyle='--', alpha=0.6)
+plt.show()
