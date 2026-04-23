@@ -30,3 +30,13 @@ df['double_stock'] = df['col_5'] * 2
 df['log_price'] = np.log(df['col_2'])
 print("#3")
 print(df[['total_value', 'double_stock', 'log_price']].head())
+
+#4 esep
+import pandas as pd
+file_name = 'catalog_products.xlsx'
+df = pd.read_excel(file_name)
+df['col_2'] = pd.to_numeric(df['col_2'], errors='coerce')
+mask = (df['col_2'] > 500) & (df['col_7']== "Electronics")
+electronics_expensive = df.loc[mask, ['col_2', 'col_7']].copy()
+print("#4")
+print(electronics_expensive.head())
