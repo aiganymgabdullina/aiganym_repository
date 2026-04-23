@@ -40,3 +40,13 @@ mask = (df['col_2'] > 500) & (df['col_7']== "Electronics")
 electronics_expensive = df.loc[mask, ['col_2', 'col_7']].copy()
 print("#4")
 print(electronics_expensive.head())
+
+#5 esep
+category_analysis = df.groupby('col_7').agg(
+    mean_price=('col_2', 'mean'),
+    max_price=('col_2', 'max'),
+    total_quantity=('col_3', 'sum')
+).reset_index()
+category_analysis = category_analysis.rename(columns={'col_7': 'category'})
+print("#5")
+print(category_analysis)
