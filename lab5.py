@@ -344,6 +344,8 @@ def get_categories():
 def count_unique_categories(category_array):
     unique_elements = np.unique(category_array)
     return len(unique_elements)
+categories = np.array(["Electronics", "Clothing", "Electronics"])
+print("15 Уникальные категории", count_unique_categories(categories))
 
 @app.get("/products/categories/unique-count")
 def get_unique_count():
@@ -499,6 +501,14 @@ def get_merged_orders():
 def filter_orders_by_total(df, min_value=100):
     filtered_df = df[df['total'] > min_value]
     return filtered_df
+data = {
+        "order_id": [101, 102],
+        "user_name": ["John", "Alice"],
+        "total": [1200, 25]
+    }
+df = pd.DataFrame(data)
+result_df = filter_orders_by_total(df, 100)
+print(result_df)
 
 
 @app.get("/pandas/orders/filter", response_class=HTMLResponse)
