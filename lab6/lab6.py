@@ -7,7 +7,6 @@ print("\nТипы данных:")
 print(df.dtypes)
 print("\nПропуски:")
 print(df.isnull().sum())
-print("\nПервые 5 строк:")
 pd.set_option('display.max_columns', None)
 pd.set_option('display.width', 1000)
 print(df.head())
@@ -247,9 +246,6 @@ print("#23")
 print(top_categories)
 
 #24 esep
-import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
 top_stock = df.sort_values(by='col_3', ascending=False).head(10)
 sns.barplot(data=top_stock, x='col_3', y='col_1', hue='col_1', palette='viridis', legend=False)
 plt.title('Топ-10 товаров по количеству на складе')
@@ -258,3 +254,17 @@ plt.ylabel('Название товара')
 plt.show()
 print("#24")
 print(top_stock[['col_1', 'col_3']])
+
+#25 esep
+bins = [0, 50, 200, 500, 1000, float('inf')]
+labels = ['0-50', '50-200', '200-500', '500-1000', '>1000']
+df['price_range'] = pd.cut(pd.to_numeric(df['col_2'], errors='coerce'), bins=bins, labels=labels)
+heatmap_data = df.pivot_table(index='col_7', columns='price_range', values='col_1', aggfunc='count', fill_value=0)
+plt.figure(figsize=(12, 8))
+sns.heatmap(heatmap_data, annot=True, fmt='d', cmap='YlGnBu')
+plt.title('Тепловая карта: Распределение товаров по категориям и ценам')
+plt.xlabel('Ценовой диапазон')
+plt.ylabel('Категория')
+plt.show()
+print("lab6 25")
+print(heatmap_data)
