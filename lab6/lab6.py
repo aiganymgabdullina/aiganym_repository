@@ -298,3 +298,5 @@ plt.ylabel('Рейтинг')
 plt.grid(True, linestyle='--', alpha=0.3)
 plt.show()
 
+#43 esep
+#12 eseppen birdei
