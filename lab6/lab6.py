@@ -227,7 +227,7 @@ plt.title('Разброс цен (стандартное отклонение) �
 plt.xlabel('Стандартное отклонение цены')
 plt.ylabel('Категория')
 plt.show()
-print("#20")
+print("#21")
 print(price_variation)
 
 #22 esep
@@ -271,3 +271,6 @@ print(heatmap_data)
 
 #36 esep
 #20 eseppen birdei
+
+#37 esep
+#21 eseppen birdei
