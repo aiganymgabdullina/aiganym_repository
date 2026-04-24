@@ -313,3 +313,20 @@ stock_threshold = mean_stock + 3 * std_stock
 extreme_items = df[(df['col_2'] > price_threshold) | (df['col_3'] > stock_threshold)]
 print("#44")
 print(extreme_items[['col_1', 'col_7', 'col_2', 'col_3']])
+
+#45 esep
+df['total_value'] = df['col_2'] * df['col_3']
+df['double_stock'] = df['col_3'] * 2
+df['log_price'] = np.log1p(df['col_2'])
+category_summary = df.groupby('col_7').agg({
+    'col_2': 'mean',
+    'col_3': 'sum'
+}).rename(columns={'col_2': 'Mean Price', 'col_3': 'Total Stock'}).reset_index()
+top_10_stock = df.sort_values('col_3', ascending=False).head(10)[['col_1', 'col_7', 'col_3']]
+top_10_value = df.sort_values('total_value', ascending=False).head(10)[['col_1', 'col_7', 'total_value']]
+with pd.ExcelWriter('catalog_final_report.xlsx', engine='openpyxl') as writer:
+    df.to_excel(writer, sheet_name='Full Catalog', index=False)
+    category_summary.to_excel(writer, sheet_name='Сводка по категориям', index=False)
+    top_10_stock.to_excel(writer, sheet_name='Топ по запасам', index=False)
+    top_10_value.to_excel(writer, sheet_name='Топ по стоимости', index=False)
+
