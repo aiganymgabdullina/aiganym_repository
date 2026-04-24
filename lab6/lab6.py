@@ -184,8 +184,21 @@ labels = ['0-50', '50-200', '200-500', '500-1000', '>1000']
 df['price_range'] = pd.cut(pd.to_numeric(df['col_2'], errors='coerce'), bins=bins, labels=labels)
 price_dist = df['price_range'].value_counts().reindex(labels).reset_index()
 price_dist.columns = ['price_range', 'count']
-sns.barplot(data=price_dist, x='price_range', y='count', palette='viridis')
+sns.barplot(data=price_dist, x='price_range', y='count', hue='price_range', palette='viridis', legend=False)
 plt.title('Распределение товаров по ценам')
 plt.show()
 print("#18")
 print(price_dist)
+
+#19 esep
+df['total_value'] = pd.to_numeric(df['col_2'], errors='coerce') * pd.to_numeric(df['col_3'], errors='coerce')
+cat_value = df.groupby('col_7')['total_value'].sum().reset_index()
+cat_value.columns = ['category', 'total_stock_value']
+max_cat = cat_value.loc[cat_value['total_stock_value'].idxmax()]
+print(f"Категория с макс. капиталом: {max_cat['category']} ({max_cat['total_stock_value']})")
+sns.barplot(data=cat_value, x='category', y='total_stock_value', hue='category', palette='magma', legend=False)
+plt.title('Суммарная стоимость товаров на складе по категориям')
+plt.xticks(rotation=45)
+plt.show()
+print("#19")
+print(cat_value)
