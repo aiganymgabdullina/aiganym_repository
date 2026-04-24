@@ -123,3 +123,8 @@ plt.xticks(rotation=45)
 plt.grid(axis='y', linestyle='--', alpha=0.7)
 plt.tight_layout()
 plt.show()
+
+#12 esep
+df_12 = df[['col_2', 'col_3', 'col_4', 'col_5', 'col_6', 'col_7']]
+sns.pairplot(df_12, hue = "col_7")
+plt.show()
