@@ -177,3 +177,15 @@ top_10_expensive = df.sort_values(by='total_value', ascending=False).head(10)
 result = top_10_expensive[['col_1', 'col_2', 'col_3', 'total_value']]
 print("#17")
 print(result)
+
+#18 esep
+bins = [0, 50, 200, 500, 1000, float('inf')]
+labels = ['0-50', '50-200', '200-500', '500-1000', '>1000']
+df['price_range'] = pd.cut(pd.to_numeric(df['col_2'], errors='coerce'), bins=bins, labels=labels)
+price_dist = df['price_range'].value_counts().reindex(labels).reset_index()
+price_dist.columns = ['price_range', 'count']
+sns.barplot(data=price_dist, x='price_range', y='count', palette='viridis')
+plt.title('Распределение товаров по ценам')
+plt.show()
+print("#18")
+print(price_dist)
