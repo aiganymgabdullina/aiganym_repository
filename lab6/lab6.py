@@ -128,3 +128,13 @@ plt.show()
 df_12 = df[['col_2', 'col_3', 'col_4', 'col_5', 'col_6', 'col_7']]
 sns.pairplot(df_12, hue = "col_7")
 plt.show()
+
+
+#13 esep
+df_13 = df[[f'col_{i}' for i in range(2, 12)]].apply(pd.to_numeric, errors='coerce')
+corr_matrix = df_13.corr()
+plt.figure(figsize=(12, 8))
+sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', fmt=".2f")
+plt.title('Тепловая карта корреляции характеристик товаров (col_2-col_11)', fontsize=15)
+plt.show()
+
