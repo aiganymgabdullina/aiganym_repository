@@ -93,10 +93,10 @@ plt.grid(axis='y', alpha=0.75)
 plt.show()
 
 #10 esep
-#10
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+df = pd.read_excel("catalog_products.xlsx")
 df['col_2'] = pd.to_numeric(df['col_2'], errors='coerce')
 df['col_3'] = pd.to_numeric(df['col_3'], errors='coerce')
 plt.figure(figsize=(10, 6))
@@ -107,4 +107,19 @@ plt.title('Взаимосвязь цены и количества товара 
 plt.xlabel('Цена ')
 plt.ylabel('Количество на складе')
 plt.grid(True, linestyle='--', alpha=0.6)
+plt.show()
+
+#11 esep
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+df['col_2'] = pd.to_numeric(df['col_2'], errors='coerce')
+plt.figure(figsize=(12, 6))
+sns.boxplot(x='col_7', y='col_2', data=df)
+plt.title('Распределение цен по категориям (col_7)')
+plt.xlabel('Категория')
+plt.ylabel('Цена ')
+plt.xticks(rotation=45)
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+plt.tight_layout()
 plt.show()
