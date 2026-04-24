@@ -162,3 +162,11 @@ category_summary.columns = ['count', 'mean_price', 'total_quantity', 'mean_log_p
 print("#15")
 print(category_summary.head())
 category_summary.to_excel('final_summary.xlsx')
+
+#16 esep
+import pandas as pd
+df['col_2'] = pd.to_numeric(df['col_2'], errors='coerce')
+idx = df.groupby('col_7')['col_2'].idxmax()
+most_expensive = df.loc[idx, ['col_1', 'col_2', 'col_7']]
+print("#16")
+print(most_expensive)
