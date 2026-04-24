@@ -128,7 +128,7 @@ plt.grid(axis='y', linestyle='--', alpha=0.7)
 plt.tight_layout()
 plt.show()
 
-#12 esep
+#12/43 esep
 df_12 = df[['col_2', 'col_3', 'col_4', 'col_5', 'col_6', 'col_7']]
 sns.pairplot(df_12, hue = "col_7")
 plt.show()
@@ -202,7 +202,7 @@ plt.show()
 print("#19")
 print(cat_value)
 
-#20 esep
+#20/36 esep
 cat_stats = df.groupby('col_7').agg({
     'col_2': 'mean',
     'col_3': 'mean'
@@ -218,7 +218,7 @@ plt.show()
 print("#20")
 print(cat_stats)
 
-#21 esep
+#21/37 esep
 price_variation = df.groupby('col_7')['col_2'].std().reset_index()
 price_variation.columns = ['category', 'std_price']
 sns.barplot(data=price_variation.sort_values('std_price', ascending=False),
@@ -230,13 +230,13 @@ plt.show()
 print("#21")
 print(price_variation)
 
-#22 esep
+#22/38 esep
 out_of_stock = df[df['col_3'] == 0]
 result = out_of_stock[['col_1', 'col_7', 'col_2']].head(10)
 print("#22")
 print(result)
 
-#23 esep
+#23/39 esep
 top_categories = df['col_7'].value_counts().head(5).reset_index()
 top_categories.columns = ['category', 'count']
 sns.barplot(data=top_categories, x='category', y='count', hue='category', palette='coolwarm', legend=False)
@@ -245,7 +245,7 @@ plt.show()
 print("#23")
 print(top_categories)
 
-#24 esep
+#24/40 esep
 top_stock = df.sort_values(by='col_3', ascending=False).head(10)
 sns.barplot(data=top_stock, x='col_3', y='col_1', hue='col_1', palette='viridis', legend=False)
 plt.title('Топ-10 товаров по количеству на складе')
@@ -255,7 +255,7 @@ plt.show()
 print("#24")
 print(top_stock[['col_1', 'col_3']])
 
-#25 esep
+#25/41 esep
 bins = [0, 50, 200, 500, 1000, float('inf')]
 labels = ['0-50', '50-200', '200-500', '500-1000', '>1000']
 df['price_range'] = pd.cut(pd.to_numeric(df['col_2'], errors='coerce'), bins=bins, labels=labels)
@@ -300,3 +300,16 @@ plt.show()
 
 #43 esep
 #12 eseppen birdei
+
+#44 esep
+df['col_2'] = pd.to_numeric(df['col_2'], errors='coerce')
+df['col_3'] = pd.to_numeric(df['col_3'], errors='coerce')
+mean_price = df['col_2'].mean()
+std_price = df['col_2'].std()
+mean_stock = df['col_3'].mean()
+std_stock = df['col_3'].std()
+price_threshold = mean_price + 3 * std_price
+stock_threshold = mean_stock + 3 * std_stock
+extreme_items = df[(df['col_2'] > price_threshold) | (df['col_3'] > stock_threshold)]
+print("#44")
+print(extreme_items[['col_1', 'col_7', 'col_2', 'col_3']])
