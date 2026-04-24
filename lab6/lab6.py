@@ -287,3 +287,14 @@ print(heatmap_data)
 #41 esep
 #25 eseppen birdei
 
+#42 esep
+df['col_2'] = pd.to_numeric(df['col_2'], errors='coerce')
+df['col_5'] = pd.to_numeric(df['col_5'], errors='coerce')
+plt.figure(figsize=(10, 6))
+sns.regplot(data=df, x='col_2', y='col_5', scatter_kws={'alpha':0.5}, line_kws={'color':'red'})
+plt.title('Взаимосвязь цены и рейтинга товаров')
+plt.xlabel('Цена ')
+plt.ylabel('Рейтинг')
+plt.grid(True, linestyle='--', alpha=0.3)
+plt.show()
+
