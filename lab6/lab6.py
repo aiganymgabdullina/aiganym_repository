@@ -236,3 +236,12 @@ out_of_stock = df[df['col_3'] == 0]
 result = out_of_stock[['col_1', 'col_7', 'col_2']].head(10)
 print("#22")
 print(result)
+
+#23 esep
+top_categories = df['col_7'].value_counts().head(5).reset_index()
+top_categories.columns = ['category', 'count']
+sns.barplot(data=top_categories, x='category', y='count', hue='category', palette='coolwarm', legend=False)
+plt.title('Топ-5 категорий по количеству товаров')
+plt.show()
+print("#23")
+print(top_categories)
