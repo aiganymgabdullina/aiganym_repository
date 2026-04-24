@@ -245,3 +245,16 @@ plt.title('Топ-5 категорий по количеству товаров'
 plt.show()
 print("#23")
 print(top_categories)
+
+#24 esep
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+top_stock = df.sort_values(by='col_3', ascending=False).head(10)
+sns.barplot(data=top_stock, x='col_3', y='col_1', hue='col_1', palette='viridis', legend=False)
+plt.title('Топ-10 товаров по количеству на складе')
+plt.xlabel('Количество (шт.)')
+plt.ylabel('Название товара')
+plt.show()
+print("#24")
+print(top_stock[['col_1', 'col_3']])
