@@ -91,7 +91,7 @@ import matplotlib.pyplot as plt
 df['col_2'] = pd.to_numeric(df['col_2'], errors='coerce')
 plt.figure(figsize=(10, 6))
 plt.hist(df['col_2'].dropna(), bins=50, color='skyblue', edgecolor='black')
-plt.title('Распределение цен товаров (col_2)')
+plt.title('Распределение цен товаров ')
 plt.xlabel('Цена товаров')
 plt.ylabel('Количество товаров')
 plt.grid(axis='y', alpha=0.75)
@@ -121,7 +121,7 @@ import matplotlib.pyplot as plt
 df['col_2'] = pd.to_numeric(df['col_2'], errors='coerce')
 plt.figure(figsize=(12, 6))
 sns.boxplot(x='col_7', y='col_2', data=df)
-plt.title('Распределение цен по категориям (col_7)')
+plt.title('Распределение цен по категориям')
 plt.xlabel('Категория')
 plt.ylabel('Цена ')
 plt.xticks(rotation=45)
@@ -170,3 +170,10 @@ idx = df.groupby('col_7')['col_2'].idxmax()
 most_expensive = df.loc[idx, ['col_1', 'col_2', 'col_7']]
 print("#16")
 print(most_expensive)
+
+#17 esep
+df['total_value'] = pd.to_numeric(df['col_2'], errors='coerce') * pd.to_numeric(df['col_3'], errors='coerce')
+top_10_expensive = df.sort_values(by='total_value', ascending=False).head(10)
+result = top_10_expensive[['col_1', 'col_2', 'col_3', 'total_value']]
+print("#17")
+print(result)
