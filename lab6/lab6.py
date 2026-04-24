@@ -202,3 +202,19 @@ plt.xticks(rotation=45)
 plt.show()
 print("#19")
 print(cat_value)
+
+#20 esep
+cat_stats = df.groupby('col_7').agg({
+    'col_2': 'mean',
+    'col_3': 'mean'
+}).reset_index()
+cat_stats.columns = ['category', 'mean_price', 'mean_quantity']
+plt.figure(figsize=(10, 6))
+sns.scatterplot(data=cat_stats, x='mean_price', y='mean_quantity', hue='category', s=200)
+plt.title('Средняя цена vs Средний запас по категориям')
+plt.xlabel('Средняя цена')
+plt.ylabel('Средний запас')
+plt.grid(True, linestyle='--', alpha=0.6)
+plt.show()
+print("#20")
+print(cat_stats)
