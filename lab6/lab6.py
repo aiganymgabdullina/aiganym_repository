@@ -230,3 +230,9 @@ plt.ylabel('Категория')
 plt.show()
 print("#20")
 print(price_variation)
+
+#22 esep
+out_of_stock = df[df['col_3'] == 0]
+result = out_of_stock[['col_1', 'col_7', 'col_2']].head(10)
+print("#22")
+print(result)
