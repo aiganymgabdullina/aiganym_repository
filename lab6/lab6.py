@@ -31,6 +31,11 @@ df['log_price'] = np.log(df['col_2'])
 print("#3")
 print(df[['total_value', 'double_stock', 'log_price']].head())
 
+#14 esep
+final_cols = ['col_1', 'col_2', 'col_3', 'col_4', 'col_5', 'col_6', 'col_7',
+              'total_value', 'double_stock', 'log_price']
+df[final_cols].to_excel('catalog_analysis.xlsx', index=False)
+
 #4 esep
 import pandas as pd
 file_name = 'catalog_products.xlsx'
@@ -138,3 +143,22 @@ sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', fmt=".2f")
 plt.title('Тепловая карта корреляции характеристик товаров (col_2-col_11)', fontsize=15)
 plt.show()
 
+#14 esep
+#3 eseppen connected
+
+#15 esep
+df['col_2'] = pd.to_numeric(df['col_2'], errors='coerce')
+df['col_3'] = pd.to_numeric(df['col_3'], errors='coerce')
+if 'log_price' not in df.columns:
+    import numpy as np
+    df['log_price'] = np.log1p(df['col_2'])
+category_summary = df.groupby('col_7').agg({
+    'col_1': 'count',
+    'col_2': 'mean',
+    'col_3': 'sum',
+    'log_price': 'mean'
+})
+category_summary.columns = ['count', 'mean_price', 'total_quantity', 'mean_log_price']
+print("#15")
+print(category_summary.head())
+category_summary.to_excel('final_summary.xlsx')
