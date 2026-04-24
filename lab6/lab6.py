@@ -218,3 +218,15 @@ plt.grid(True, linestyle='--', alpha=0.6)
 plt.show()
 print("#20")
 print(cat_stats)
+
+#21 esep
+price_variation = df.groupby('col_7')['col_2'].std().reset_index()
+price_variation.columns = ['category', 'std_price']
+sns.barplot(data=price_variation.sort_values('std_price', ascending=False),
+            x='std_price', y='category', hue='category', palette='magma', legend=False)
+plt.title('Разброс цен (стандартное отклонение) по категориям')
+plt.xlabel('Стандартное отклонение цены')
+plt.ylabel('Категория')
+plt.show()
+print("#20")
+print(price_variation)
