@@ -266,5 +266,8 @@ plt.title('Тепловая карта: Распределение товаро�
 plt.xlabel('Ценовой диапазон')
 plt.ylabel('Категория')
 plt.show()
-print("lab6 25")
+print("#25")
 print(heatmap_data)
+
+#36 esep
+#20 eseppen birdei
