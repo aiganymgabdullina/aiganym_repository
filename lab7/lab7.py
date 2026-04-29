@@ -10,6 +10,8 @@ from sklearn.tree import DecisionTreeRegressor
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.model_selection import cross_val_score
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score
 #1 esep
 file_path = 'catalog_products.xlsx'
 df = pd.read_excel(file_path)
@@ -240,4 +242,24 @@ print(f"Средний MAE: {avg_mae_cv:.2f} (+/- {std_mae_cv:.2f})")
 print(f"Средний MSE: {avg_mse_cv:.2f}")
 print(f"\nMAE на одиночном сплите: {mae_improved:.2f}")
 
+#18 esep
+def get_price_class(price):
+    if price < 100:
+        return 0
+    elif 100 <= price <= 500:
+        return 1
+    else:
+        return 2
+df_final['price_class'] = df_final['col_2'].apply(get_price_class)
+X_cls = df_final.drop(columns=['col_2', 'price_class'])
+y_cls = df_final['price_class']
+X_train_c, X_test_c, y_train_c, y_test_c = train_test_split(
+    X_cls, y_cls, test_size=0.2, random_state=42
+)
+clf = DecisionTreeClassifier(random_state=42)
+clf.fit(X_train_c, y_train_c)
+y_pred_cls = clf.predict(X_test_c)
+accuracy = accuracy_score(y_test_c, y_pred_cls)
+print("#18")
+print(f"Точность модели (Accuracy): {accuracy:.2%}")
 
