@@ -90,3 +90,15 @@ mse = mean_squared_error(y_test, y_pred)
 print("#8")
 print(f"Средняя абсолютная ошибка (MAE): {mae:.2f}")
 print(f"Среднеквадратичная ошибка (MSE): {mse:.2f}")
+
+#9 esep
+model_improved = LinearRegression()
+model_improved.fit(X_train, y_train)
+y_pred_improved = model_improved.predict(X_test)
+mae_improved = mean_absolute_error(y_test, y_pred_improved)
+mse_improved = mean_squared_error(y_test, y_pred_improved)
+print("#9")
+print(f"MAE (Базовая модель): {mae:.2f}  ->  MAE (Улучшенная): {mae_improved:.2f}")
+print(f"MSE (Базовая модель): {mse:.2f}  ->  MSE (Улучшенная): {mse_improved:.2f}")
+improvement = ((mae - mae_improved) / mae) * 100
+print(f"\nТочность предсказания улучшилась на: {improvement:.2f}%")
