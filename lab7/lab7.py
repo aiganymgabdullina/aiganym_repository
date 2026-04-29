@@ -70,3 +70,11 @@ print(anomalies[['col_2', 'col_7']].head())
 df_final = pd.get_dummies(df_cleaned, columns=['col_7'], drop_first=True).select_dtypes(exclude=['object'])
 print("#6")
 print(all(df_final.dtypes.apply(lambda x: pd.api.types.is_numeric_dtype(x))))
+
+#7 esep
+from sklearn.model_selection import train_test_split
+y = df_final['col_2']
+X = df_final.drop(columns=['col_2'])
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+print("#7")
+print(all(X.dtypes.apply(lambda x: pd.api.types.is_numeric_dtype(x))))
