@@ -202,3 +202,28 @@ sns.barplot(x=list(category_results.values()), y=list(category_results.keys()), 
 plt.title('Ошибка предсказания (MAE) по категориям')
 plt.xlabel('Средняя абсолютная ошибка')
 plt.show()
+
+#16 esep
+print("#16")
+for cat in categories:
+    cat_data = df_cleaned[df_cleaned['col_7'] == cat]
+    X_cat = cat_data[['col_3', 'total_value', 'double_stock', 'log_price']]
+    y_cat = cat_data['col_2']
+    model_cat = LinearRegression()
+    model_cat.fit(X_cat, y_cat)
+    y_pred_cat = model_cat.predict(X_cat)
+    cat_data = cat_data.copy()
+    cat_data['abs_error'] = abs(y_cat - y_pred_cat)
+    plt.figure(figsize=(8, 5))
+    sns.scatterplot(x=y_cat, y=y_pred_cat, alpha=0.6)
+    lims = [min(y_cat.min(), y_pred_cat.min()), max(y_cat.max(), y_pred_cat.max())]
+    plt.plot(lims, lims, color='red', linestyle='--', label='Идеал')
+    plt.title(f'Предсказания для категории: {cat}')
+    plt.xlabel('Истинная цена')
+    plt.ylabel('Предсказанная цена')
+    plt.legend()
+    plt.show()
+    print(f"\nНаибольшие ошибки в категории '{cat}':")
+    worst_predictions = cat_data.sort_values(by='abs_error', ascending=False).head(3)
+    print(worst_predictions[['col_2', 'abs_error']])
+    print("-" * 30)
