@@ -12,6 +12,7 @@ from sklearn.neighbors import KNeighborsRegressor
 from sklearn.model_selection import cross_val_score
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score
+from sklearn.metrics import confusion_matrix, classification_report
 #1 esep
 file_path = 'catalog_products.xlsx'
 df = pd.read_excel(file_path)
@@ -262,4 +263,19 @@ y_pred_cls = clf.predict(X_test_c)
 accuracy = accuracy_score(y_test_c, y_pred_cls)
 print("#18")
 print(f"Точность модели (Accuracy): {accuracy:.2%}")
+
+#19 esep
+cm = confusion_matrix(y_test_c, y_pred_cls)
+plt.figure(figsize=(8, 6))
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
+            xticklabels=['Низкая (0)', 'Средняя (1)', 'Высокая (2)'],
+            yticklabels=['Низкая (0)', 'Средняя (1)', 'Высокая (2)'])
+
+plt.title('Матрица ошибок (Confusion Matrix)')
+plt.ylabel('Истинный класс')
+plt.xlabel('Предсказанный класс')
+plt.show()
+print("\nОтчет о классификации:")
+print(classification_report(y_test_c, y_pred_cls,
+                            target_names=['Низкая', 'Средняя', 'Высокая']))
 
