@@ -9,6 +9,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.neighbors import KNeighborsRegressor
+from sklearn.model_selection import cross_val_score
 #1 esep
 file_path = 'catalog_products.xlsx'
 df = pd.read_excel(file_path)
@@ -226,4 +227,17 @@ for cat in categories:
     print(f"\nНаибольшие ошибки в категории '{cat}':")
     worst_predictions = cat_data.sort_values(by='abs_error', ascending=False).head(3)
     print(worst_predictions[['col_2', 'abs_error']])
-    print("-" * 30)
+
+#17 esep
+model_cv = DecisionTreeRegressor(random_state=42)
+mae_scores = cross_val_score(model_cv, X, y, cv=5, scoring='neg_mean_absolute_error')
+mse_scores = cross_val_score(model_cv, X, y, cv=5, scoring='neg_mean_squared_error')
+avg_mae_cv = -np.mean(mae_scores)
+avg_mse_cv = -np.mean(mse_scores)
+std_mae_cv = np.std(mae_scores)
+print("#17")
+print(f"Средний MAE: {avg_mae_cv:.2f} (+/- {std_mae_cv:.2f})")
+print(f"Средний MSE: {avg_mse_cv:.2f}")
+print(f"\nMAE на одиночном сплите: {mae_improved:.2f}")
+
+
