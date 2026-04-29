@@ -5,6 +5,7 @@ import seaborn as sns
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
 #1 esep
 file_path = 'catalog_products.xlsx'
 df = pd.read_excel(file_path)
@@ -115,3 +116,12 @@ plt.ylabel('Предсказанная цена (y_pred)')
 plt.legend()
 plt.grid(True)
 plt.show()
+
+#11 esep
+features_to_scale = ['col_3', 'total_value', 'double_stock', 'log_price']
+scaler = StandardScaler()
+X_train[features_to_scale] = scaler.fit_transform(X_train[features_to_scale])
+X_test[features_to_scale] = scaler.transform(X_test[features_to_scale])
+print("#11")
+print(f"Среднее после StandardScaler: {X_train[features_to_scale].mean().mean():.2f}")
+print(f"Стандартное отклонение: {X_train[features_to_scale].std().mean():.2f}")
