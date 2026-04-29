@@ -6,6 +6,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
+from sklearn.tree import DecisionTreeRegressor
 #1 esep
 file_path = 'catalog_products.xlsx'
 df = pd.read_excel(file_path)
@@ -125,3 +126,26 @@ X_test[features_to_scale] = scaler.transform(X_test[features_to_scale])
 print("#11")
 print(f"Среднее после StandardScaler: {X_train[features_to_scale].mean().mean():.2f}")
 print(f"Стандартное отклонение: {X_train[features_to_scale].std().mean():.2f}")
+
+#12 esep
+tree_model = DecisionTreeRegressor(random_state=42)
+tree_model.fit(X_train, y_train)
+importances = tree_model.feature_importances_
+feature_names = X.columns
+feature_importance_df = pd.DataFrame({
+    'Признак': feature_names,
+    'Важность': importances
+}).sort_values(by='Важность', ascending=False)
+plt.figure(figsize=(10, 8))
+sns.barplot(
+    x='Важность',
+    y='Признак',
+    data=feature_importance_df.head(10),
+    palette='viridis',
+    hue='Признак',
+    legend=False
+)
+plt.title('Топ-10 самых важных признаков для предсказания цены')
+plt.xlabel('Относительная важность')
+plt.ylabel('Название признака')
+plt.show()
