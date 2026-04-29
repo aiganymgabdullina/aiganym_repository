@@ -63,4 +63,10 @@ lower_bound = mean_price - 3 * std_price
 upper_bound = mean_price + 3 * std_price
 anomalies = df[(df['col_2'] > upper_bound) | (df['col_2'] < lower_bound)]
 df_cleaned = df[(df['col_2'] <= upper_bound) & (df['col_2'] >= lower_bound)]
+print("#5")
 print(anomalies[['col_2', 'col_7']].head())
+
+#6 esep
+df_final = pd.get_dummies(df_cleaned, columns=['col_7'], drop_first=True).select_dtypes(exclude=['object'])
+print("#6")
+print(all(df_final.dtypes.apply(lambda x: pd.api.types.is_numeric_dtype(x))))
