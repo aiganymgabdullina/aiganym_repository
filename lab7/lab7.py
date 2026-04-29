@@ -102,3 +102,16 @@ print(f"MAE (Базовая модель): {mae:.2f}  ->  MAE (Улучшенн�
 print(f"MSE (Базовая модель): {mse:.2f}  ->  MSE (Улучшенная): {mse_improved:.2f}")
 improvement = ((mae - mae_improved) / mae) * 100
 print(f"\nТочность предсказания улучшилась на: {improvement:.2f}%")
+
+#10 esep
+plt.figure(figsize=(10, 6))
+sns.scatterplot(x=y_test, y=y_pred_improved, alpha=0.5, color='teal', label='Предсказания')
+min_val = min(y_test.min(), y_pred_improved.min())
+max_val = max(y_test.max(), y_pred_improved.max())
+plt.plot([min_val, max_val], [min_val, max_val], color='red', linestyle='--', lw=2, label='Идеальное предсказание')
+plt.title('Сравнение истинных цен и предсказаний модели')
+plt.xlabel('Истинная цена (y_test)')
+plt.ylabel('Предсказанная цена (y_pred)')
+plt.legend()
+plt.grid(True)
+plt.show()
