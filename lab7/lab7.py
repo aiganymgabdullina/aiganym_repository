@@ -2,6 +2,9 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_absolute_error, mean_squared_error
+from sklearn.model_selection import train_test_split
 #1 esep
 file_path = 'catalog_products.xlsx'
 df = pd.read_excel(file_path)
@@ -72,9 +75,18 @@ print("#6")
 print(all(df_final.dtypes.apply(lambda x: pd.api.types.is_numeric_dtype(x))))
 
 #7 esep
-from sklearn.model_selection import train_test_split
 y = df_final['col_2']
 X = df_final.drop(columns=['col_2'])
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 print("#7")
 print(all(X.dtypes.apply(lambda x: pd.api.types.is_numeric_dtype(x))))
+
+#8 esep
+model = LinearRegression()
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+mae = mean_absolute_error(y_test, y_pred)
+mse = mean_squared_error(y_test, y_pred)
+print("#8")
+print(f"Средняя абсолютная ошибка (MAE): {mae:.2f}")
+print(f"Среднеквадратичная ошибка (MSE): {mse:.2f}")
