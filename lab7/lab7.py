@@ -279,3 +279,22 @@ print("\nОтчет о классификации:")
 print(classification_report(y_test_c, y_pred_cls,
                             target_names=['Низкая', 'Средняя', 'Высокая']))
 
+#20 esep
+final_results = X_test.copy()
+final_results['actual_price'] = y_test
+final_results['predicted_price'] = y_pred_improved
+final_results['actual_class'] = y_test_c
+final_results['predicted_class'] = y_pred_cls
+final_results.to_excel('catalog_ml_predictions.xlsx', index=False)
+fig, axes = plt.subplots(1, 3, figsize=(20, 6))
+sns.scatterplot(x=y_test, y=y_pred_improved, ax=axes[0], alpha=0.6, color='teal')
+axes[0].plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], 'r--')
+axes[0].set_title('Точность предсказания цены')
+sns.barplot(x='Важность', y='Признак', data=feature_importance_df.head(7),
+            ax=axes[1], hue='Признак', palette='viridis', legend=False)
+axes[1].set_title('Главные факторы ценообразования')
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', ax=axes[2])
+axes[2].set_title('Матрица ошибок (Классы цен)')
+plt.tight_layout()
+plt.show()
+
