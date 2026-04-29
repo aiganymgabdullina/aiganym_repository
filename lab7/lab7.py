@@ -8,6 +8,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.preprocessing import PolynomialFeatures
+from sklearn.neighbors import KNeighborsRegressor
 #1 esep
 file_path = 'catalog_products.xlsx'
 df = pd.read_excel(file_path)
@@ -164,3 +165,14 @@ mse_poly = mean_squared_error(y_test, y_pred_poly)
 print("#13")
 print(f"MAE (Полиномиальная): {mae_poly:.2f}")
 print(f"MSE (Полиномиальная): {mse_poly:.2f}")
+
+#14 esep
+knn_model = KNeighborsRegressor(n_neighbors=5)
+knn_model.fit(X_train, y_train)
+y_pred_knn = knn_model.predict(X_test)
+mae_knn = mean_absolute_error(y_test, y_pred_knn)
+mse_knn = mean_squared_error(y_test, y_pred_knn)
+print("#14")
+print(f"KNN (k=5):       MAE = {mae_knn:.2f}, MSE = {mse_knn:.2f}")
+print(f"Decision Tree:   MAE = {mae_improved:.2f}")
+print(f"Linear Reg:      MAE = {mae_poly:.2f}")
