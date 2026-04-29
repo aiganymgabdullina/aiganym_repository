@@ -176,3 +176,29 @@ print("#14")
 print(f"KNN (k=5):       MAE = {mae_knn:.2f}, MSE = {mse_knn:.2f}")
 print(f"Decision Tree:   MAE = {mae_improved:.2f}")
 print(f"Linear Reg:      MAE = {mae_poly:.2f}")
+
+#15 esep
+categories = df_cleaned['col_7'].unique()
+category_results = {}
+print("#15")
+for cat in categories:
+    cat_data = df_cleaned[df_cleaned['col_7'] == cat]
+    if len(cat_data) < 10:
+        continue
+    X_cat = cat_data[['col_3', 'total_value', 'double_stock', 'log_price']]
+    y_cat = cat_data['col_2']
+    X_c_train, X_c_test, y_c_train, y_c_test = train_test_split(
+        X_cat, y_cat, test_size=0.2, random_state=42
+    )
+    model_cat = LinearRegression()
+    model_cat.fit(X_c_train, y_c_train)
+    y_pred_cat = model_cat.predict(X_c_test)
+    mae_cat = mean_absolute_error(y_c_test, y_pred_cat)
+    category_results[cat] = mae_cat
+    print(f"Категория '{cat}': MAE = {mae_cat:.2f}")
+plt.figure(figsize=(10, 6))
+sns.barplot(x=list(category_results.values()), y=list(category_results.keys()), palette='magma',
+            hue=list(category_results.keys()), legend=False)
+plt.title('Ошибка предсказания (MAE) по категориям')
+plt.xlabel('Средняя абсолютная ошибка')
+plt.show()
