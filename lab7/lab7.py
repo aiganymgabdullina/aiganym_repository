@@ -55,3 +55,12 @@ plt.xlabel('Категория (col_7)')
 plt.ylabel('Цена (col_2)')
 plt.tight_layout()
 plt.show()
+
+#5 esep
+mean_price = df['col_2'].mean()
+std_price = df['col_2'].std()
+lower_bound = mean_price - 3 * std_price
+upper_bound = mean_price + 3 * std_price
+anomalies = df[(df['col_2'] > upper_bound) | (df['col_2'] < lower_bound)]
+df_cleaned = df[(df['col_2'] <= upper_bound) & (df['col_2'] >= lower_bound)]
+print(anomalies[['col_2', 'col_7']].head())
